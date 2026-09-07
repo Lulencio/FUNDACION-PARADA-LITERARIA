@@ -52,53 +52,62 @@
     <a href="#colaborar" class="nav-cta">Sumarse / Aportar</a>
   </div>
 
-  <!-- ─── HERO INSTITUCIONAL ─── -->
-  <section id="hero">
-    <div class="hero-left">
-      <div class="hero-eyebrow">Fundación Cultural · Rancagua, Chile</div>
-      <h1 class="hero-title">
-        Libros y cultura comunitaria<br>en los barrios de <em>Rancagua</em>
-      </h1>
-      <p class="hero-subtitle">Ponemos libros donde la gente espera, formamos mediadores y creamos talleres artísticos en la Región de O'Higgins</p>
-      <p class="hero-desc">
-        Desde 2023, la <strong>Fundación Parada Literaria</strong> lleva bibliotecas libres a los centros de salud, capacita a educadores en fomento lector y desarrolla experiencias artísticas con las comunidades de Rancagua y la región.
-      </p>
+  <!-- Hero: Pliego Inicial / Libro Pop-Up -->
+  <section id="hero" class="popup-book-stage">
+    <div class="book-container">
+      <div class="book-spine"></div>
+      
+      <!-- Página Izquierda (Texto institucional y datos de impacto) -->
+      <div class="book-page page-left">
+        <div class="page-content">
+          <div class="hero-eyebrow">Fundación Cultural · Rancagua, Chile</div>
+          <h1 class="hero-title">
+            Libros y cultura comunitaria<br>en los barrios de <em>Rancagua</em>
+          </h1>
+          <p class="hero-subtitle">Ponemos libros donde la gente espera, formamos mediadores y creamos talleres artísticos en la Región de O'Higgins</p>
+          <p class="hero-desc">
+            Desde 2023, la <strong>Fundación Parada Literaria</strong> lleva bibliotecas libres a los centros de salud, capacita a educadores en fomento lector y desarrolla experiencias artísticas con las comunidades de Rancagua y la región.
+          </p>
 
+          <div class="hero-actions">
+            <a href="#que-hacemos" class="btn-primary">Conoce nuestro trabajo</a>
+            <a href="#puntos-donacion" class="btn-secondary">Dónde donar libros</a>
+          </div>
 
-
-      <div class="hero-actions">
-        <a href="#que-hacemos" class="btn-primary">Conoce nuestro trabajo</a>
-        <a href="#puntos-donacion" class="btn-secondary">Dónde donar libros</a>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number">7</div>
+              <div class="stat-label">centros de salud con biblioteca</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">+25.000</div>
+              <div class="stat-label">libros recibidos en donación</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">+16.000</div>
+              <div class="stat-label">libros puestos en circulación</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Estadísticas Animadas Oficiales -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <div class="stat-number">7</div>
-          <div class="stat-label">centros de salud con biblioteca</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">+25.000</div>
-          <div class="stat-label">libros recibidos en donación</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">+16.000</div>
-          <div class="stat-label">libros puestos en circulación</div>
-        </div>
-      </div>
-    </div>
+      <!-- Página Derecha (Diorama Pop-up: Figura erguida de Gabriela Mistral y cita grabada) -->
+      <div class="book-page page-right">
+        <div class="page-background-fold"></div>
+        <div class="page-content right-content">
+          <div class="popup-layer popup-figure-layer">
+            <div class="popup-pedestal"></div>
+            <img src="img/gabriela.png" alt="Gabriela Mistral — Inspiración del proyecto" class="popup-cutout mistral-img">
+            <div class="popup-shadow"></div>
+          </div>
 
-    <div class="hero-right">
-      <div class="hero-visual">
-        <div class="mistral-container">
-          <img src="img/gabriela.png" alt="Gabriela Mistral — Inspiración del proyecto" class="mistral-img">
-        </div>
-        <div class="hero-quote">
-          <p>"Hacer leer como se come todos los días, hasta que la lectura sea como el mirar un ejercicio natural, pero gozoso siempre."</p>
-          <cite>
-            — Gabriela Mistral
-            <span>Poeta, Educadora y Premio Nobel</span>
-          </cite>
+          <div class="popup-layer popup-quote-card">
+            <p>"Hacer leer como se come todos los días, hasta que la lectura sea como el mirar un ejercicio natural, pero gozoso siempre."</p>
+            <cite>
+              — Gabriela Mistral
+              <span>Poeta, Educadora y Premio Nobel</span>
+            </cite>
+          </div>
         </div>
       </div>
     </div>
@@ -612,6 +621,10 @@
       </div>
     </div>
   </footer>
+
+  <!-- GSAP & ScrollTrigger para la experiencia Pop-Up -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <script src="script.js"></script>
 </body>
