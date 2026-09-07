@@ -1,4 +1,4 @@
-// ─── Scroll Animaciones Fade-Up ───
+// Animaciones al hacer scroll (fade-up)
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -9,45 +9,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ─── Contadores Animados ───
-function animarContador(el) {
-  const target = parseInt(el.dataset.target, 10);
-  const prefix = el.dataset.prefix || '';
-  const duration = 1800; // ms
-  const startTime = performance.now();
-
-  function formatNum(n) {
-    if (n >= 1000) return (n / 1000).toFixed(1).replace('.0', '') + 'k';
-    return n.toString();
-  }
-
-  function step(currentTime) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-    const current = Math.floor(eased * target);
-    el.textContent = prefix + formatNum(current);
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
-
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.querySelectorAll('.counter').forEach(counter => {
-        animarContador(counter);
-      });
-      counterObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.3 });
-
-const heroStats = document.querySelector('.hero-stats');
-if (heroStats) counterObserver.observe(heroStats);
-
-// ─── Sombra en Nav al hacer Scroll ───
+// Sombra en Nav al hacer Scroll
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
   if (window.scrollY > 50) {
@@ -57,7 +19,7 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// ─── Menú Hamburguesa Móvil ───
+// Menu hamburguesa (movil)
 const navToggle = document.getElementById('navToggle');
 const navMenuMobile = document.getElementById('navMenuMobile');
 
@@ -84,7 +46,7 @@ if (navToggle && navMenuMobile) {
   });
 }
 
-// ─── Filtros por Categoría ("Burbujas") ───
+// Filtros por categoria
 const bubbleBtns = document.querySelectorAll('.bubble-btn');
 const activityCards = document.querySelectorAll('.activity-card');
 
@@ -117,15 +79,9 @@ bubbleBtns.forEach(btn => {
   });
 });
 
-// Chips del Hero que filtran directo
-document.querySelectorAll('.chip-item[data-filter]').forEach(chip => {
-  chip.addEventListener('click', (e) => {
-    const filter = chip.dataset.filter;
-    filtrarCategorias(filter);
-  });
-});
 
-// ─── Ventana Modal de Detalles de Actividades ───
+
+// Modal de actividades
 const activityModal = document.getElementById('activityModal');
 const modalClose = document.getElementById('modalClose');
 const modalTag = document.getElementById('modalTag');
@@ -157,9 +113,10 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
-activityCards.forEach(card => {
-  card.addEventListener('click', () => abrirModal(card));
-});
+// Modal desactivado hasta tener fotos reales de cada actividad
+// activityCards.forEach(card => {
+//   card.addEventListener('click', () => abrirModal(card));
+// });
 
 if (modalClose) modalClose.addEventListener('click', cerrarModal);
 
@@ -175,7 +132,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// ─── Manejo Formulario de Colaboradores ───
+// Manejo del formulario de contacto / colaboradores
 const colaboraForm = document.getElementById('colaboraForm');
 const formFeedback = document.getElementById('formFeedback');
 

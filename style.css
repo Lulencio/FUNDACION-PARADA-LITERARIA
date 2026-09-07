@@ -247,34 +247,6 @@ nav {
   margin-bottom: 2rem;
 }
 
-/* Chips / Burbujas del Hero */
-.hero-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 2.2rem;
-}
-
-.chip-item {
-  background: var(--white);
-  color: var(--bark);
-  border: 1px solid rgba(61, 43, 26, 0.15);
-  padding: 0.45rem 1rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-}
-
-.chip-item:hover {
-  background: var(--terracotta);
-  color: var(--white);
-  border-color: var(--terracotta);
-  transform: translateY(-2px);
-}
 
 .hero-actions {
   display: flex;
@@ -447,80 +419,62 @@ section { padding: 4.5rem 0; }
 
 .section-header.text-center .section-desc { margin: 0 auto; }
 
-/* ─── SECCIÓN FUNDACIÓN (MISIÓN / VISIÓN) ─── */
+/* Seccion Fundación (Manifiesto Editorial) */
 #fundacion {
   background: var(--ink);
   color: var(--cream);
 }
 
-#fundacion .section-eyebrow { color: var(--gold); }
 #fundacion .section-title { color: var(--cream); }
 #fundacion .section-title em { color: var(--gold); }
-#fundacion .section-desc { color: rgba(245, 239, 224, 0.8); }
 
-.fundacion-grid {
+.manifiesto {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 3.5rem;
+  align-items: start;
 }
 
-.fundacion-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(245, 239, 224, 0.12);
-  padding: 2.5rem 2rem;
-  border-radius: 4px;
-  position: relative;
-  transition: transform 0.3s, border-color 0.3s;
-}
-
-.fundacion-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--gold);
-}
-
-.card-badge {
-  display: inline-block;
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid rgba(184, 146, 10, 0.4);
-  padding: 0.2rem 0.6rem;
-  border-radius: 50px;
-  margin-bottom: 1.2rem;
-}
-
-.card-icon { font-size: 2.2rem; margin-bottom: 1rem; }
-
-.card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--cream);
-  margin-bottom: 1rem;
-}
-
-.card-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: rgba(245, 239, 224, 0.8);
-}
-
-.pilares-list {
-  list-style: none;
+.manifiesto-texto {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1.4rem;
 }
 
-.pilares-list li {
-  font-size: 0.9rem;
+.manifiesto-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem;
   line-height: 1.5;
-  color: rgba(245, 239, 224, 0.8);
+  color: var(--gold);
+  font-style: italic;
 }
 
-.pilares-list strong { color: var(--gold); }
+.manifiesto-texto p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(245, 239, 224, 0.85);
+}
+
+.manifiesto-columnas {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border-left: 1px solid rgba(245, 239, 224, 0.15);
+  padding-left: 2.5rem;
+}
+
+.manifiesto-col h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 0.8rem;
+}
+
+.manifiesto-col p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(245, 239, 224, 0.75);
+}
 
 /* ─── SECCIÓN QUÉ HACEMOS (BURBUJAS E INTERACTIVA) ─── */
 #que-hacemos { background: var(--cream); }
@@ -565,30 +519,18 @@ section { padding: 4.5rem 0; }
   overflow: hidden;
   border: 1px solid rgba(61, 43, 26, 0.08);
   transition: transform 0.3s, box-shadow 0.3s;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
 }
 
 .activity-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 36px rgba(28, 20, 9, 0.1);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(28, 20, 9, 0.08);
 }
 
-/* Esquina doblada de papel al hover */
-.activity-card::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 0; height: 0;
-  border-style: solid;
-  border-width: 0;
-  border-color: transparent var(--terracotta) transparent transparent;
-  transition: border-width 0.3s;
-}
-
-.activity-card:hover::after {
-  border-width: 0 32px 32px 0;
+.activity-card.featured {
+  border-top: 3px solid var(--terracotta);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAF6EE 100%);
 }
 
 .activity-tag {
@@ -600,7 +542,6 @@ section { padding: 4.5rem 0; }
   margin-bottom: 0.8rem;
 }
 
-.activity-icon { font-size: 2.2rem; margin-bottom: 1rem; }
 
 .activity-title {
   font-family: 'Playfair Display', serif;
@@ -1156,34 +1097,55 @@ footer {
   gap: 0.8rem;
 }
 
-/* ─── SECCIÓN ALIANZAS Y PRENSA ─── */
+/* Seccion Alianzas y Prensa */
 #alianzas {
   background: var(--cream);
 }
 
-.alianzas-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.8rem;
+.alianzas-lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
   margin-bottom: 3.5rem;
 }
 
-.alianza-chip {
+.alianza-grupo {
   background: var(--white);
-  border: 1px solid rgba(61, 43, 26, 0.12);
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--bark);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
-  transition: transform 0.2s, border-color 0.2s;
+  padding: 1.8rem 1.6rem;
+  border-radius: 4px;
+  border: 1px solid rgba(61, 43, 26, 0.08);
 }
 
-.alianza-chip:hover {
-  transform: translateY(-2px);
-  border-color: var(--terracotta);
+.alianza-cat {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  color: var(--terracotta);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(196, 87, 26, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.alianza-grupo ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.alianza-grupo li {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--bark);
+  position: relative;
+  padding-left: 1rem;
+}
+
+.alianza-grupo li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+  font-weight: bold;
 }
 
 .prensa-grid {
@@ -1260,7 +1222,9 @@ footer {
   .hero-right { min-height: 320px; }
   .activities-grid { grid-template-columns: repeat(2, 1fr); }
   .team-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .fundacion-grid { grid-template-columns: 1fr; }
+  .manifiesto { grid-template-columns: 1fr; gap: 2.5rem; }
+  .manifiesto-columnas { border-left: none; padding-left: 0; border-top: 1px solid rgba(245, 239, 224, 0.15); padding-top: 2rem; }
+  .alianzas-lista { grid-template-columns: repeat(2, 1fr); }
   .project-featured-card { grid-template-columns: 1fr; }
   .project-img-wrapper { min-height: 250px; }
   .donacion-grid { grid-template-columns: 1fr; }
@@ -1272,6 +1236,7 @@ footer {
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
   .activities-grid { grid-template-columns: 1fr; }
+  .alianzas-lista { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
   .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
