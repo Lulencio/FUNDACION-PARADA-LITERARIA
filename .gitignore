@@ -1,0 +1,10 @@
+﻿# Sistema operativo y temporales
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+
+# Documentos internos de trabajo y archivos pesados
+docs/internos/
+*.docx
+*.pdf
