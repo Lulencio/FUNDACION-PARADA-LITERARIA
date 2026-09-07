@@ -81,24 +81,40 @@ bubbleBtns.forEach(btn => {
 
 
 
-// Modal de actividades
+// Modal de detalles de actividades
 const activityModal = document.getElementById('activityModal');
 const modalClose = document.getElementById('modalClose');
 const modalTag = document.getElementById('modalTag');
 const modalTitle = document.getElementById('modalTitle');
 const modalDesc = document.getElementById('modalDesc');
-const modalImg1 = document.getElementById('modalImg1');
-const modalImg2 = document.getElementById('modalImg2');
+const modalMeta = document.getElementById('modalMeta');
 
 function abrirModal(card) {
   if (!activityModal) return;
   
   modalTag.textContent = card.dataset.tag || 'Actividad';
-  modalTitle.textContent = card.dataset.title || 'Detalle de la Actividad';
-  modalDesc.textContent = card.dataset.desc || 'Descripción de la actividad realizada por Fundación Parada Literaria.';
+  modalTitle.textContent = card.dataset.title || 'Detalle de la actividad';
+  modalDesc.textContent = card.dataset.desc || 'Descripción de la actividad comunitaria.';
   
-  if (card.dataset.img) {
-    modalImg1.src = card.dataset.img;
+  if (modalMeta) {
+    const categoryNames = {
+      'formacion': 'Formación y Mediación',
+      'materiales': 'Creación de Material Didáctico',
+      'talleres': 'Talleres y Comunidad'
+    };
+    const cat = card.dataset.category || '';
+    const catLabel = categoryNames[cat] || 'Iniciativa territorial';
+
+    modalMeta.innerHTML = `
+      <div class="modal-meta-item">
+        <strong>Área de trabajo:</strong>
+        <span>${catLabel}</span>
+      </div>
+      <div class="modal-meta-item">
+        <strong>Territorio:</strong>
+        <span>Rancagua, Región de O'Higgins</span>
+      </div>
+    `;
   }
   
   activityModal.classList.add('open');
@@ -113,10 +129,9 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
-// Modal desactivado hasta tener fotos reales de cada actividad
-// activityCards.forEach(card => {
-//   card.addEventListener('click', () => abrirModal(card));
-// });
+activityCards.forEach(card => {
+  card.addEventListener('click', () => abrirModal(card));
+});
 
 if (modalClose) modalClose.addEventListener('click', cerrarModal);
 
