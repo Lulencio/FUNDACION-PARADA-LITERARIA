@@ -52,96 +52,117 @@
     <a href="#colaborar" class="nav-cta">Sumarse / Aportar</a>
   </div>
 
-  <!-- Hero: Pliego Inicial / Libro Pop-Up -->
-  <section id="hero" class="popup-book-stage">
-    <div class="book-container">
-      <div class="book-spine"></div>
-      
-      <!-- Página Izquierda (Texto institucional y datos de impacto) -->
-      <div class="book-page page-left">
-        <div class="page-content">
-          <div class="hero-eyebrow">Fundación Cultural · Rancagua, Chile</div>
-          <h1 class="hero-title">
-            Libros y cultura comunitaria<br>en los barrios de <em>Rancagua</em>
-          </h1>
-          <p class="hero-subtitle">Ponemos libros donde la gente espera, formamos mediadores y creamos talleres artísticos en la Región de O'Higgins</p>
-          <p class="hero-desc">
-            Desde 2023, la <strong>Fundación Parada Literaria</strong> lleva bibliotecas libres a los centros de salud, capacita a educadores en fomento lector y desarrolla experiencias artísticas con las comunidades de Rancagua y la región.
-          </p>
+  <!-- Hero & Fundación: Pliego Interactivo con Paso de Hoja 3D (Page-Flip) -->
+  <div class="popup-book-viewport" id="libro-experiencia">
+    <section id="hero" class="popup-book-stage">
+      <div class="book-container">
+        <!-- Lomo central de encuadernación -->
+        <div class="book-spine"></div>
+        
+        <!-- Página Izquierda Fija: Hero (Portada y Cifras) -->
+        <div class="book-page page-left hero-page-base">
+          <div class="page-content">
+            <div class="hero-eyebrow">Fundación Cultural · Rancagua, Chile</div>
+            <h1 class="hero-title">
+              Libros y cultura comunitaria<br>en los barrios de <em>Rancagua</em>
+            </h1>
+            <p class="hero-subtitle">Ponemos libros donde la gente espera, formamos mediadores y creamos talleres artísticos en la Región de O'Higgins</p>
+            <p class="hero-desc">
+              Desde 2023, la <strong>Fundación Parada Literaria</strong> lleva bibliotecas libres a los centros de salud, capacita a educadores en fomento lector y desarrolla experiencias artísticas con las comunidades de Rancagua y la región.
+            </p>
 
-          <div class="hero-actions">
-            <a href="#que-hacemos" class="btn-primary">Conoce nuestro trabajo</a>
-            <a href="#puntos-donacion" class="btn-secondary">Dónde donar libros</a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-item">
-              <div class="stat-number">7</div>
-              <div class="stat-label">centros de salud con biblioteca</div>
+            <div class="hero-actions">
+              <a href="#que-hacemos" class="btn-primary">Conoce nuestro trabajo</a>
+              <a href="#puntos-donacion" class="btn-secondary">Dónde donar libros</a>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">+25.000</div>
-              <div class="stat-label">libros recibidos en donación</div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">centros de salud con biblioteca</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">+25.000</div>
+                <div class="stat-label">libros recibidos en donación</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">+16.000</div>
+                <div class="stat-label">libros puestos en circulación</div>
+              </div>
             </div>
-            <div class="stat-item">
-              <div class="stat-number">+16.000</div>
-              <div class="stat-label">libros puestos en circulación</div>
+          </div>
+        </div>
+
+        <!-- Página Derecha Descubierta / Subyacente (Spread 1 - Misión y Visión) -->
+        <div class="book-page page-right-underlay" id="fundacion-derecha">
+          <div class="page-background-fold"></div>
+          <div class="page-content fundacion-right-content">
+            <div class="manifiesto-columnas-book">
+              <div class="manifiesto-card card-mision">
+                <div class="card-tag">Propósito Territorial</div>
+                <h3>Misión</h3>
+                <p>Promover el acceso a la lectura y la cultura mediante proyectos territoriales de mediación, fomento lector y participación comunitaria en la Región de O'Higgins.</p>
+              </div>
+              <div class="manifiesto-card card-vision">
+                <div class="card-tag">Horizonte Comunitario</div>
+                <h3>Visión</h3>
+                <p>Consolidar en Rancagua la red de circulación de libros y mediación lectora comunitaria más grande del país, acercando la cultura a cada barrio y centro de salud.</p>
+              </div>
+            </div>
+            <div class="book-page-footer-note">
+              <span>Pliego I · Fundación Parada Literaria</span>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Página Derecha (Diorama Pop-up: Figura erguida de Gabriela Mistral y cita grabada) -->
-      <div class="book-page page-right">
-        <div class="page-background-fold"></div>
-        <div class="page-content right-content">
-          <div class="popup-layer popup-figure-layer">
-            <div class="popup-pedestal"></div>
-            <img src="img/gabriela.png" alt="Gabriela Mistral — Inspiración del proyecto" class="popup-cutout mistral-img">
-            <div class="popup-shadow"></div>
+        <!-- Hoja Móvil 3D (Gira sobre el lomo: 0 a -180deg) -->
+        <div class="book-leaf" id="bookLeaf">
+          <!-- Cara Frontal (Anverso): Diorama Pop-up de Gabriela Mistral -->
+          <div class="leaf-face leaf-front">
+            <div class="page-background-fold"></div>
+            <div class="page-content right-content">
+              <div class="popup-layer popup-figure-layer">
+                <div class="popup-pedestal"></div>
+                <img src="img/gabriela.png" alt="Gabriela Mistral — Inspiración del proyecto" class="popup-cutout mistral-img">
+                <div class="popup-shadow"></div>
+              </div>
+
+              <div class="popup-layer popup-quote-card">
+                <p>"Hacer leer como se come todos los días, hasta que la lectura sea como el mirar un ejercicio natural, pero gozoso siempre."</p>
+                <cite>
+                  — Gabriela Mistral
+                  <span>Poeta, Educadora y Premio Nobel</span>
+                </cite>
+              </div>
+
+              <div class="leaf-hint-turn">
+                <span>Desliza para pasar la página →</span>
+              </div>
+            </div>
           </div>
 
-          <div class="popup-layer popup-quote-card">
-            <p>"Hacer leer como se come todos los días, hasta que la lectura sea como el mirar un ejercicio natural, pero gozoso siempre."</p>
-            <cite>
-              — Gabriela Mistral
-              <span>Poeta, Educadora y Premio Nobel</span>
-            </cite>
+          <!-- Cara Trasera (Reverso): Al girar 180° se posa a la izquierda (Manifiesto de Quiénes Somos) -->
+          <div class="leaf-face leaf-back" id="fundacion">
+            <div class="page-content fundacion-manifesto-content">
+              <div class="section-header-compact">
+                <span class="manifesto-badge">Manifiesto</span>
+                <h2 class="section-title">Quiénes <em>somos</em></h2>
+              </div>
+              <div class="manifiesto-texto-book">
+                <p class="manifiesto-intro">Nacimos en 2023 con una idea sencilla: que los libros estén donde la gente los necesita, no solo donde se espera encontrarlos.</p>
+                <p>Somos un equipo de mediadoras, artistas y educadoras de la Región de O'Higgins que lleva bibliotecas libres a centros de salud, forma mediadores de lectura y crea talleres artísticos en comunidades que históricamente han quedado lejos de la oferta cultural.</p>
+                <p>Creemos que la lectura es un derecho cotidiano. Que un libro en una sala de espera puede cambiar una tarde difícil. Que una capacitación a una educadora rural multiplica lectores.</p>
+              </div>
+            </div>
           </div>
+
+          <!-- Sombra dinámica de flexión de hoja -->
+          <div class="leaf-shading"></div>
         </div>
+
       </div>
-    </div>
-  </section>
-
-  <!-- ─── SECCIÓN: SOBRE LA FUNDACIÓN (MISIÓN / VISIÓN) ─── -->
-  <section id="fundacion">
-    <div class="container">
-      <div class="section-header fade-up">
-        <h2 class="section-title">Quiénes <em>somos</em></h2>
-      </div>
-
-      <div class="manifiesto fade-up">
-        <div class="manifiesto-texto">
-          <p class="manifiesto-intro">Nacimos en 2023 con una idea sencilla: que los libros estén donde la gente los necesita, no solo donde se espera encontrarlos.</p>
-
-          <p>Somos un equipo de mediadoras, artistas y educadoras de la Región de O'Higgins que lleva bibliotecas libres a centros de salud, forma mediadores de lectura y crea talleres artísticos en comunidades que históricamente han quedado lejos de la oferta cultural.</p>
-
-          <p>Creemos que la lectura es un derecho cotidiano. Que un libro en una sala de espera puede cambiar una tarde difícil. Que una capacitación a una educadora rural multiplica lectores. Que un taller textil con mujeres de la región puede terminar expuesto en el Museo Regional.</p>
-        </div>
-
-        <div class="manifiesto-columnas">
-          <div class="manifiesto-col">
-            <h3>Misión</h3>
-            <p>Promover el acceso a la lectura y la cultura mediante proyectos territoriales de mediación, fomento lector y participación comunitaria en la Región de O'Higgins.</p>
-          </div>
-          <div class="manifiesto-col">
-            <h3>Visión</h3>
-            <p>Consolidar en Rancagua la red de circulación de libros y mediación lectora comunitaria más grande del país, acercando la cultura a cada barrio y centro de salud.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <!-- ─── SECCIÓN: QUÉ HACEMOS (ÁREAS Y TALLERES INTERACTIVOS) ─── -->
   <section id="que-hacemos">

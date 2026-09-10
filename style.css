@@ -187,6 +187,11 @@ nav {
 }
 
 /* ─── HERO: PLIEGO INICIAL POP-UP (POC) ─── */
+.popup-book-viewport {
+  position: relative;
+  width: 100%;
+}
+
 #hero.popup-book-stage {
   min-height: calc(100dvh - var(--header-height));
   height: calc(100dvh - var(--header-height));
@@ -195,7 +200,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 1600px;
+  perspective: 2000px;
   background: radial-gradient(circle at 50% 35%, rgba(219, 200, 168, 0.45) 0%, rgba(230, 214, 189, 0.85) 75%);
   box-sizing: border-box;
 }
@@ -203,14 +208,16 @@ nav {
 .book-container {
   width: 100%;
   max-width: 1160px;
-  max-height: calc(100dvh - var(--header-height) - 2.5rem);
+  height: calc(100dvh - var(--header-height) - 2.5rem);
+  max-height: 680px;
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: 1fr 1fr;
   position: relative;
   transform-style: preserve-3d;
   box-shadow: 0 25px 50px -15px rgba(28, 20, 9, 0.22),
               0 10px 18px -5px rgba(28, 20, 9, 0.12);
   border-radius: 6px;
+  background: #EFE8DA;
 }
 
 /* Lomo central de encuadernación */
@@ -218,15 +225,15 @@ nav {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 62.5%;
+  left: 50%;
   width: 18px;
   transform: translateX(-50%);
   background: linear-gradient(90deg, 
-    rgba(28, 20, 9, 0.2) 0%, 
-    rgba(28, 20, 9, 0.04) 45%, 
-    rgba(28, 20, 9, 0.22) 100%
+    rgba(28, 20, 9, 0.25) 0%, 
+    rgba(28, 20, 9, 0.04) 48%, 
+    rgba(28, 20, 9, 0.28) 100%
   );
-  z-index: 10;
+  z-index: 25;
   pointer-events: none;
 }
 
@@ -234,13 +241,13 @@ nav {
 .book-page {
   position: relative;
   background: #FAF6EE;
-  padding: clamp(1.6rem, 3.2vh, 2.8rem) clamp(1.8rem, 3vw, 3rem);
+  padding: clamp(1.4rem, 2.8vh, 2.5rem) clamp(1.6rem, 2.6vw, 2.6rem);
   transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
+  height: 100%;
 }
 
 .page-left {
@@ -248,16 +255,208 @@ nav {
   border-right: 1px solid rgba(61, 43, 26, 0.12);
   transform-origin: right center;
   box-shadow: inset -25px 0 35px -15px rgba(28, 20, 9, 0.08);
+  z-index: 5;
 }
 
-.page-right {
+/* Página subyacente derecha (Spread 1: Misión y Visión) */
+.page-right-underlay {
+  position: relative;
   background: #F4EEDF;
   border-radius: 0 6px 6px 0;
-  transform-origin: left center;
   box-shadow: inset 25px 0 35px -15px rgba(28, 20, 9, 0.12);
-  align-items: center;
-  padding: clamp(1.6rem, 3vh, 2.5rem) clamp(1.5rem, 2.5vw, 2.5rem);
-  overflow: visible;
+  padding: clamp(1.4rem, 2.8vh, 2.4rem) clamp(1.6rem, 2.5vw, 2.4rem);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fundacion-right-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+}
+
+.manifiesto-columnas-book {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vh, 1.6rem);
+}
+
+.manifiesto-card {
+  background: #FAF6EE;
+  border-radius: 4px;
+  padding: clamp(1rem, 2vh, 1.4rem) clamp(1.2rem, 1.8vw, 1.6rem);
+  box-shadow: 0 6px 16px rgba(28, 20, 9, 0.06), 0 1px 3px rgba(28, 20, 9, 0.04);
+  border-left: 3px solid var(--terracotta);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.manifiesto-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(28, 20, 9, 0.1);
+}
+
+.card-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.manifiesto-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.2vh, 1.45rem);
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.manifiesto-card p {
+  font-size: clamp(0.82rem, 1.35vh, 0.88rem);
+  line-height: 1.55;
+  color: #5a4a38;
+  margin: 0;
+}
+
+.book-page-footer-note {
+  margin-top: clamp(0.8rem, 1.5vh, 1.2rem);
+  text-align: right;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--bark);
+  opacity: 0.75;
+  border-top: 1px dashed rgba(61, 43, 26, 0.18);
+  padding-top: 0.6rem;
+}
+
+/* ── Hoja Móvil 3D (Book Leaf) ── */
+.book-leaf {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  z-index: 15;
+  will-change: transform;
+}
+
+.leaf-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 0 6px 6px 0;
+}
+
+/* Cara Frontal (Anverso - Diorama Mistral) */
+.leaf-front {
+  background: #F4EEDF;
+  box-shadow: inset 25px 0 35px -15px rgba(28, 20, 9, 0.12);
+  padding: clamp(1.4rem, 2.8vh, 2.4rem) clamp(1.5rem, 2.5vw, 2.5rem);
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+/* Cara Trasera (Reverso - Manifiesto) */
+.leaf-back {
+  background: #FAF6EE;
+  transform: rotateY(180deg);
+  border-radius: 6px 0 0 6px;
+  border-right: 1px solid rgba(61, 43, 26, 0.12);
+  box-shadow: inset -25px 0 35px -15px rgba(28, 20, 9, 0.1);
+  padding: clamp(1.6rem, 3vh, 2.5rem) clamp(1.8rem, 2.8vw, 2.6rem);
+  z-index: 1;
+}
+
+/* Contenido del Manifiesto en la cara trasera */
+.fundacion-manifesto-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.section-header-compact {
+  margin-bottom: clamp(0.6rem, 1.4vh, 1rem);
+}
+
+.manifesto-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.2rem;
+}
+
+.section-header-compact .section-title {
+  font-size: clamp(1.8rem, 3.2vh, 2.4rem);
+  margin: 0;
+}
+
+.manifiesto-texto-book {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.6rem, 1.2vh, 0.9rem);
+}
+
+.manifiesto-texto-book .manifiesto-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.15rem, 1.8vh, 1.35rem);
+  line-height: 1.4;
+  color: var(--terracotta);
+  font-style: italic;
+  font-weight: 600;
+  margin: 0;
+}
+
+.manifiesto-texto-book p {
+  font-size: clamp(0.82rem, 1.35vh, 0.88rem);
+  line-height: 1.6;
+  color: #5a4a38;
+  margin: 0;
+}
+
+/* Indicador sutil de pasar página */
+.leaf-hint-turn {
+  margin-top: clamp(0.6rem, 1.2vh, 1rem);
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 700;
+  opacity: 0.8;
+  animation: pulseHint 2.4s infinite ease-in-out;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.6; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(4px); }
+}
+
+/* Sombra dinámica de flexión de hoja */
+.leaf-shading {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(28, 20, 9, 0.35) 0%, transparent 40%, rgba(28, 20, 9, 0.15) 100%);
+  opacity: 0;
+  border-radius: 0 6px 6px 0;
+  transition: opacity 0.1s linear;
+  z-index: 10;
 }
 
 /* Pliegue de fondo sutil en página derecha */
@@ -544,61 +743,18 @@ section {
 
 .section-header.text-center .section-desc { margin: 0 auto; }
 
-/* Seccion Fundación (Manifiesto Editorial) */
-#fundacion {
-  background: var(--ink);
-  color: var(--cream);
+/* Seccion Fundación (Integrada dentro del Pliego del Libro Pop-Up) */
+#fundacion.leaf-back {
+  background: #FAF6EE;
+  color: var(--ink);
 }
 
-#fundacion .section-title { color: var(--cream); }
-#fundacion .section-title em { color: var(--gold); }
-
-.manifiesto {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 3.5rem;
-  align-items: start;
+#fundacion.leaf-back .section-title {
+  color: var(--ink);
 }
 
-.manifiesto-texto {
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-}
-
-.manifiesto-intro {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.55rem;
-  line-height: 1.5;
-  color: var(--gold);
-  font-style: italic;
-}
-
-.manifiesto-texto p {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: rgba(245, 239, 224, 0.85);
-}
-
-.manifiesto-columnas {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  border-left: 1px solid rgba(245, 239, 224, 0.15);
-  padding-left: 2.5rem;
-}
-
-.manifiesto-col h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4rem;
-  color: var(--gold);
-  margin-bottom: 0.8rem;
-}
-
-.manifiesto-col p {
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(245, 239, 224, 0.75);
+#fundacion.leaf-back .section-title em {
+  color: var(--terracotta);
 }
 
 /* ─── SECCIÓN QUÉ HACEMOS (BURBUJAS E INTERACTIVA) ─── */
@@ -1365,14 +1521,52 @@ footer {
     perspective: none; 
   }
   .book-container { 
+    height: auto;
     max-height: none;
-    grid-template-columns: 1fr; 
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
     border-radius: 6px; 
     box-shadow: 0 20px 40px rgba(28, 20, 9, 0.12); 
+    background: transparent;
   }
   .book-spine { display: none; }
-  .page-left { border-radius: 6px 6px 0 0; border-right: none; border-bottom: 1px solid rgba(61, 43, 26, 0.12); padding: 3rem 2rem; }
-  .page-right { border-radius: 0 0 6px 6px; padding: 2.5rem 2rem; }
+  .page-left { 
+    border-radius: 6px 6px 0 0; 
+    border-right: none; 
+    border-bottom: 1px solid rgba(61, 43, 26, 0.12); 
+    padding: 3rem 2rem; 
+  }
+  .book-leaf {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+    transform-style: flat;
+  }
+  .leaf-face {
+    position: static;
+    inset: auto;
+    backface-visibility: visible;
+    -webkit-backface-visibility: visible;
+  }
+  .leaf-front {
+    border-radius: 0;
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid rgba(61, 43, 26, 0.12);
+  }
+  .leaf-back {
+    transform: none;
+    border-radius: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(61, 43, 26, 0.12);
+    padding: 2.5rem 2rem;
+  }
+  .page-right-underlay {
+    border-radius: 0 0 6px 6px;
+    padding: 2.5rem 2rem;
+  }
+  .leaf-hint-turn, .leaf-shading { display: none; }
   .activities-grid { grid-template-columns: repeat(2, 1fr); }
   .team-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .manifiesto { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1395,7 +1589,7 @@ footer {
     padding: 1.8rem 1rem 2.5rem; 
   }
   .page-left { padding: 2rem 1.2rem; }
-  .page-right { padding: 2rem 1.2rem; }
+  .leaf-front, .leaf-back, .page-right-underlay { padding: 2rem 1.2rem; }
   .hero-stats { flex-direction: column; gap: 1rem; }
   .activities-grid { grid-template-columns: 1fr; }
   .alianzas-lista { grid-template-columns: 1fr; }
@@ -1415,7 +1609,7 @@ footer {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .book-container, .book-page, .popup-figure-layer, .popup-cutout, .popup-quote-card {
+  .book-container, .book-page, .book-leaf, .leaf-face, .popup-figure-layer, .popup-cutout, .popup-quote-card {
     transform: none !important;
   }
 }

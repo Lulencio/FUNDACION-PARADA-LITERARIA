@@ -169,67 +169,124 @@ function initPopUpBookHero() {
   const stage = document.querySelector('.popup-book-stage');
   const bookContainer = document.querySelector('.book-container');
   const pageLeft = document.querySelector('.page-left');
-  const pageRight = document.querySelector('.page-right');
+  const bookLeaf = document.getElementById('bookLeaf');
+  const leafFront = document.querySelector('.leaf-front');
+  const leafBack = document.querySelector('.leaf-back');
   const figureLayer = document.querySelector('.popup-figure-layer');
   const quoteCard = document.querySelector('.popup-quote-card');
-  const popupCutout = document.querySelector('.popup-cutout');
   const popupShadow = document.querySelector('.popup-shadow');
+  const leafShading = document.querySelector('.leaf-shading');
+  const underlayPage = document.querySelector('.page-right-underlay');
+  const manifiestoCards = document.querySelectorAll('.manifiesto-card');
 
-  if (!stage || !bookContainer || !pageLeft || !pageRight) return;
+  if (!stage || !bookContainer || !bookLeaf) return;
 
   const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isDesktop = window.innerWidth > 1024;
 
   if (isReduced) return;
 
-  // Estado inicial antes de la apertura
-  if (isDesktop) {
+  if (isDesktop && typeof gsap !== 'undefined') {
+    if (typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+
+    // 1. Estado inicial de apertura física al cargar la página
     gsap.set(bookContainer, { rotateX: 6, rotateY: -3, z: -40 });
     gsap.set(pageLeft, { rotateY: 10 });
-    gsap.set(pageRight, { rotateY: -12 });
+    gsap.set(bookLeaf, { rotateY: 0, transformOrigin: 'left center' });
     if (figureLayer) gsap.set(figureLayer, { rotateX: -65, z: 0, opacity: 0 });
     if (quoteCard) gsap.set(quoteCard, { rotateX: -30, z: 5, opacity: 0 });
     if (popupShadow) gsap.set(popupShadow, { scaleX: 0.4, opacity: 0 });
 
-    // Timeline de apertura física del libro
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    const openTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.to(pageLeft, { rotateY: 0, duration: 1.2, delay: 0.2 })
-      .to(pageRight, { rotateY: 0, duration: 1.2 }, '<')
-      .to(bookContainer, { rotateX: 0, rotateY: 0, z: 0, duration: 1.4 }, '<')
-      // La figura pop-up se yergue desde el pliegue
+    openTl.to(pageLeft, { rotateY: 0, duration: 1.2, delay: 0.15 })
+      .to(bookContainer, { rotateX: 0, rotateY: 0, z: 0, duration: 1.3 }, '<')
       .to(figureLayer, { rotateX: 0, z: 35, opacity: 1, duration: 1.1, ease: 'back.out(1.4)' }, '-=0.8')
       .to(popupShadow, { scaleX: 1, opacity: 1, duration: 1.1 }, '<')
-      // La tarjeta de cita se levanta en un segundo plano
       .to(quoteCard, { rotateX: 0, z: 22, opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.6');
 
-    // Microinteracción sutil de paralaje 3D con el cursor
+    // 2. Efecto Paso de Hoja 3D (Page-Flip) vinculado a ScrollTrigger
+    if (typeof ScrollTrigger !== 'undefined') {
+      const flipTl = gsap.timeline({
+        scrollTrigger: {
+          id: 'bookFlipTrigger',
+          trigger: '#libro-experiencia',
+          start: 'top top+=84',
+          end: '+=900',
+          pin: true,
+          scrub: 1.2,
+          anticipatePin: 1
+        }
+      });
+
+      // Paso de página progresivo:
+      flipTl
+        // La figura pop-up y la cita se pliegan al despegar la hoja
+        .to(figureLayer, {
+          rotateX: -75,
+          z: 5,
+          opacity: 0.2,
+          duration: 0.35,
+          ease: 'power2.in'
+        }, 0)
+        .to(quoteCard, {
+          rotateX: -40,
+          z: 2,
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power2.in'
+        }, 0)
+        // La hoja gira 180 grados hacia la izquierda sobre el lomo
+        .to(bookLeaf, {
+          rotateY: -180,
+          duration: 1,
+          ease: 'power1.inOut'
+        }, 0)
+        // Sombra de flexión y relieve que sube hasta el punto vertical y luego se disipa
+        .to(leafShading, {
+          opacity: 0.85,
+          duration: 0.45,
+          ease: 'power2.in'
+        }, 0.05)
+        .to(leafShading, {
+          opacity: 0,
+          duration: 0.45,
+          ease: 'power2.out'
+        }, 0.55)
+        // Aparecen las tarjetas de Misión y Visión de la página que quedó revelada
+        .from(manifiestoCards, {
+          y: 20,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.4,
+          ease: 'power2.out'
+        }, 0.6);
+    }
+
+    // 3. Microinteracción de paralaje sutil con el cursor (cuando el libro está en reposo)
     stage.addEventListener('mousemove', (e) => {
+      // Solo mover si la hoja está cerrada o casi cerrada
+      const currentRot = gsap.getProperty(bookLeaf, 'rotateY');
+      if (Math.abs(currentRot) > 30) return;
+
       const rect = stage.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
 
       gsap.to(bookContainer, {
-        rotateY: x * 4,
-        rotateX: -y * 4,
+        rotateY: x * 3.5,
+        rotateX: -y * 3.5,
         duration: 0.8,
         ease: 'power1.out'
       });
 
-      if (figureLayer) {
+      if (figureLayer && currentRot > -20) {
         gsap.to(figureLayer, {
-          x: x * 10,
-          rotateY: x * 6,
+          x: x * 8,
+          rotateY: x * 5,
           duration: 0.6,
-          ease: 'power1.out'
-        });
-      }
-
-      if (quoteCard) {
-        gsap.to(quoteCard, {
-          x: x * -6,
-          y: y * -4,
-          duration: 0.7,
           ease: 'power1.out'
         });
       }
@@ -238,15 +295,32 @@ function initPopUpBookHero() {
     stage.addEventListener('mouseleave', () => {
       gsap.to(bookContainer, { rotateX: 0, rotateY: 0, duration: 1, ease: 'power2.out' });
       if (figureLayer) gsap.to(figureLayer, { x: 0, rotateY: 0, duration: 1, ease: 'power2.out' });
-      if (quoteCard) gsap.to(quoteCard, { x: 0, y: 0, duration: 1, ease: 'power2.out' });
     });
+
+    // 4. Soporte para enlaces directos a #fundacion desde la barra de navegación
+    const navFundacionLinks = document.querySelectorAll('a[href="#fundacion"]');
+    navFundacionLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        if (window.innerWidth > 1024) {
+          e.preventDefault();
+          const trigger = ScrollTrigger.getById('bookFlipTrigger') || ScrollTrigger.getAll()[0];
+          if (trigger) {
+            window.scrollTo({
+              top: trigger.end - 50,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
+    });
+
   } else {
-    // Modo Móvil / Tablet: Apertura plana y ligera
-    gsap.from([pageLeft, pageRight], {
+    // Modo Móvil / Tablet: Entrada natural vertical sin distorsiones 3D
+    gsap.from([pageLeft, leafFront, leafBack, underlayPage], {
       opacity: 0,
-      y: 25,
-      duration: 0.8,
-      stagger: 0.2,
+      y: 20,
+      duration: 0.7,
+      stagger: 0.15,
       ease: 'power2.out'
     });
     if (figureLayer) {
@@ -254,7 +328,7 @@ function initPopUpBookHero() {
         scale: 0.9,
         opacity: 0,
         duration: 0.8,
-        delay: 0.3,
+        delay: 0.2,
         ease: 'back.out(1.2)'
       });
     }
