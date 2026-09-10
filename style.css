@@ -187,35 +187,38 @@ nav {
 }
 
 /* ─── HERO: PLIEGO INICIAL POP-UP (POC) ─── */
+/* ─── ESCENARIO Y ESTRUCTURA DEL LIBRO POP-UP MULTI-PLIEGO ─── */
 .popup-book-viewport {
   position: relative;
   width: 100%;
-}
-
-#hero.popup-book-stage {
   min-height: calc(100dvh - var(--header-height));
-  height: calc(100dvh - var(--header-height));
   margin-top: var(--header-height);
-  padding: clamp(0.8rem, 1.8vh, 1.8rem) 2rem;
+  background: radial-gradient(circle at 50% 35%, rgba(219, 200, 168, 0.45) 0%, rgba(230, 214, 189, 0.85) 75%);
   display: flex;
   justify-content: center;
   align-items: center;
-  perspective: 2000px;
-  background: radial-gradient(circle at 50% 35%, rgba(219, 200, 168, 0.45) 0%, rgba(230, 214, 189, 0.85) 75%);
   box-sizing: border-box;
+  padding: clamp(0.6rem, 1.5vh, 1.4rem) 1.5rem;
+}
+
+.popup-book-stage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 2200px;
 }
 
 .book-container {
   width: 100%;
-  max-width: 1160px;
-  height: calc(100dvh - var(--header-height) - 2.5rem);
-  max-height: 680px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  max-width: 1180px;
+  height: calc(100dvh - var(--header-height) - 2rem);
+  max-height: 700px;
+  min-height: 540px;
   position: relative;
   transform-style: preserve-3d;
-  box-shadow: 0 25px 50px -15px rgba(28, 20, 9, 0.22),
-              0 10px 18px -5px rgba(28, 20, 9, 0.12);
+  box-shadow: 0 25px 50px -15px rgba(28, 20, 9, 0.24),
+              0 10px 18px -5px rgba(28, 20, 9, 0.14);
   border-radius: 6px;
   background: #EFE8DA;
 }
@@ -229,25 +232,47 @@ nav {
   width: 18px;
   transform: translateX(-50%);
   background: linear-gradient(90deg, 
-    rgba(28, 20, 9, 0.25) 0%, 
+    rgba(28, 20, 9, 0.28) 0%, 
     rgba(28, 20, 9, 0.04) 48%, 
-    rgba(28, 20, 9, 0.28) 100%
+    rgba(28, 20, 9, 0.3) 100%
   );
-  z-index: 25;
+  z-index: 40;
   pointer-events: none;
+}
+
+/* ── Pliegos del Libro (Spreads) ── */
+.book-spread {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  transform-style: preserve-3d;
+  z-index: 1;
+}
+
+.book-spread.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 10;
 }
 
 /* Páginas del libro */
 .book-page {
   position: relative;
   background: #FAF6EE;
-  padding: clamp(1.4rem, 2.8vh, 2.5rem) clamp(1.6rem, 2.6vw, 2.6rem);
+  padding: clamp(1.2rem, 2.4vh, 2.2rem) clamp(1.4rem, 2.4vw, 2.4rem);
   transform-style: preserve-3d;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   box-sizing: border-box;
   height: 100%;
+  overflow: hidden;
 }
 
 .page-left {
@@ -255,188 +280,54 @@ nav {
   border-right: 1px solid rgba(61, 43, 26, 0.12);
   transform-origin: right center;
   box-shadow: inset -25px 0 35px -15px rgba(28, 20, 9, 0.08);
-  z-index: 5;
 }
 
-/* Página subyacente derecha (Spread 1: Misión y Visión) */
-.page-right-underlay {
-  position: relative;
+.page-right {
   background: #F4EEDF;
   border-radius: 0 6px 6px 0;
+  transform-origin: left center;
   box-shadow: inset 25px 0 35px -15px rgba(28, 20, 9, 0.12);
-  padding: clamp(1.4rem, 2.8vh, 2.4rem) clamp(1.6rem, 2.5vw, 2.4rem);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-.fundacion-right-content {
+.page-content {
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: center;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
-.manifiesto-columnas-book {
+/* Controles de Navegación de Pie de Página en cada Pliego */
+.page-nav-controls {
   display: flex;
-  flex-direction: column;
-  gap: clamp(1rem, 2vh, 1.6rem);
+  align-items: center;
+  padding-top: 0.5rem;
+  margin-top: auto;
+  border-top: 1px dashed rgba(61, 43, 26, 0.15);
+  z-index: 5;
 }
 
-.manifiesto-card {
-  background: #FAF6EE;
-  border-radius: 4px;
-  padding: clamp(1rem, 2vh, 1.4rem) clamp(1.2rem, 1.8vw, 1.6rem);
-  box-shadow: 0 6px 16px rgba(28, 20, 9, 0.06), 0 1px 3px rgba(28, 20, 9, 0.04);
-  border-left: 3px solid var(--terracotta);
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.page-nav-split {
+  justify-content: space-between;
 }
 
-.manifiesto-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(28, 20, 9, 0.1);
-}
-
-.card-tag {
-  font-size: 0.65rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--terracotta);
-  font-weight: 700;
-  margin-bottom: 0.3rem;
-}
-
-.manifiesto-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.2rem, 2.2vh, 1.45rem);
-  color: var(--ink);
-  margin-bottom: 0.4rem;
-}
-
-.manifiesto-card p {
-  font-size: clamp(0.82rem, 1.35vh, 0.88rem);
-  line-height: 1.55;
-  color: #5a4a38;
-  margin: 0;
-}
-
-.book-page-footer-note {
-  margin-top: clamp(0.8rem, 1.5vh, 1.2rem);
-  text-align: right;
-  font-size: 0.7rem;
+.spread-indicator {
+  font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--bark);
   opacity: 0.75;
-  border-top: 1px dashed rgba(61, 43, 26, 0.18);
-  padding-top: 0.6rem;
 }
 
-/* ── Hoja Móvil 3D (Book Leaf) ── */
-.book-leaf {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  z-index: 15;
-  will-change: transform;
-}
-
-.leaf-face {
-  position: absolute;
-  inset: 0;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 0 6px 6px 0;
-}
-
-/* Cara Frontal (Anverso - Diorama Mistral) */
-.leaf-front {
-  background: #F4EEDF;
-  box-shadow: inset 25px 0 35px -15px rgba(28, 20, 9, 0.12);
-  padding: clamp(1.4rem, 2.8vh, 2.4rem) clamp(1.5rem, 2.5vw, 2.5rem);
-  transform: rotateY(0deg) translateZ(1px);
-}
-
-/* Cara Trasera (Reverso - Manifiesto) */
-.leaf-back {
-  background: #FAF6EE;
-  transform: rotateY(180deg) translateZ(1px);
-  border-radius: 6px 0 0 6px;
-  border-right: 1px solid rgba(61, 43, 26, 0.12);
-  box-shadow: inset -25px 0 35px -15px rgba(28, 20, 9, 0.1);
-  padding: clamp(1.6rem, 3vh, 2.5rem) clamp(1.8rem, 2.8vw, 2.6rem);
-}
-
-/* Contenido del Manifiesto en la cara trasera */
-.fundacion-manifesto-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-.section-header-compact {
-  margin-bottom: clamp(0.6rem, 1.4vh, 1rem);
-}
-
-.manifesto-badge {
-  display: inline-block;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--terracotta);
-  margin-bottom: 0.2rem;
-}
-
-.section-header-compact .section-title {
-  font-size: clamp(1.8rem, 3.2vh, 2.4rem);
-  margin: 0;
-}
-
-.manifiesto-texto-book {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(0.6rem, 1.2vh, 0.9rem);
-}
-
-.manifiesto-texto-book .manifiesto-intro {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.15rem, 1.8vh, 1.35rem);
-  line-height: 1.4;
-  color: var(--terracotta);
-  font-style: italic;
-  font-weight: 600;
-  margin: 0;
-}
-
-.manifiesto-texto-book p {
-  font-size: clamp(0.82rem, 1.35vh, 0.88rem);
-  line-height: 1.6;
-  color: #5a4a38;
-  margin: 0;
-}
-
-/* Botones de pasar y devolver página tipo lengüeta artesanal */
+/* Botones artesanales de paso de hoja */
 .btn-turn-leaf {
-  margin-top: clamp(0.6rem, 1.2vh, 1rem);
   background: var(--terracotta);
   color: #FFFFFF;
   border: none;
   border-radius: 4px;
-  padding: 0.55rem 1.1rem;
+  padding: 0.45rem 1rem;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -444,17 +335,15 @@ nav {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 12px rgba(196, 87, 26, 0.25);
-  transition: all 0.25s ease;
-  pointer-events: auto;
-  align-self: center;
+  gap: 0.4rem;
+  box-shadow: 0 3px 10px rgba(196, 87, 26, 0.25);
+  transition: all 0.2s ease;
 }
 
 .btn-turn-leaf:hover {
   background: #A0390F;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(196, 87, 26, 0.35);
+  box-shadow: 0 5px 14px rgba(196, 87, 26, 0.35);
 }
 
 .prev-leaf-btn {
@@ -462,8 +351,6 @@ nav {
   color: var(--bark);
   border: 1px solid rgba(61, 43, 26, 0.25);
   box-shadow: none;
-  margin-top: clamp(0.8rem, 1.4vh, 1.2rem);
-  align-self: flex-start;
 }
 
 .prev-leaf-btn:hover {
@@ -474,10 +361,422 @@ nav {
   box-shadow: none;
 }
 
-/* Sombra dinámica de flexión de hoja */
-.leaf-shading {
+/* Encabezados compactos para páginas del libro */
+.section-header-compact {
+  margin-bottom: clamp(0.5rem, 1.2vh, 0.9rem);
+}
+
+.section-header-compact .section-title {
+  font-size: clamp(1.6rem, 2.8vh, 2.3rem);
+  margin-bottom: 0.2rem;
+  line-height: 1.15;
+}
+
+.page-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 2.2vh, 1.5rem);
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.section-desc-compact {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.95rem, 1.5vh, 1.1rem);
+  color: #5a4a38;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.manifesto-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 0.2rem;
+}
+
+/* ── PLIEGO 2: Actividades dentro del libro ── */
+.category-bubbles-book {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.category-bubbles-book .bubble-btn {
+  padding: 0.35rem 0.8rem;
+  font-size: 0.72rem;
+}
+
+.book-activities-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  overflow-y: auto;
+  padding-right: 0.4rem;
+  max-height: clamp(280px, 45vh, 400px);
+}
+
+.book-activities-scroll .activity-card {
+  padding: 0.9rem 1.1rem;
+  background: #FAF6EE;
+  border: 1px solid rgba(61, 43, 26, 0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-activities-scroll .activity-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(28, 20, 9, 0.08);
+}
+
+.book-activities-scroll .activity-tag {
+  font-size: 0.62rem;
+  margin-bottom: 0.2rem;
+}
+
+.book-activities-scroll .activity-title {
+  font-size: 1.02rem;
+  margin-bottom: 0.3rem;
+}
+
+.book-activities-scroll .activity-desc {
+  font-size: 0.78rem;
+  line-height: 1.45;
+  margin-bottom: 0.5rem;
+}
+
+.book-activities-scroll .activity-footer {
+  padding-top: 0.4rem;
+}
+
+/* ── PLIEGO 3: Proyectos CESFAM y Puntos ── */
+.project-paper-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  background: #FAF6EE;
+  padding: 0.8rem;
+  border-radius: 4px;
+  border: 1px solid rgba(61, 43, 26, 0.1);
+}
+
+.project-photo-frame {
+  position: relative;
+  width: 100%;
+  height: clamp(140px, 20vh, 180px);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.project-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-caption-tag {
   position: absolute;
-  inset: 0;
+  bottom: 6px;
+  left: 6px;
+  background: var(--terracotta);
+  color: #FFF;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  font-weight: 700;
+  border-radius: 2px;
+}
+
+.project-quote-book {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--terracotta);
+  border-left: 2px solid var(--terracotta);
+  padding-left: 0.6rem;
+  margin: 0.4rem 0;
+  line-height: 1.35;
+}
+
+.project-quote-book cite {
+  display: block;
+  font-size: 0.75rem;
+  font-style: normal;
+  color: var(--bark);
+  font-weight: 700;
+}
+
+.project-text-book {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #5a4a38;
+  margin: 0;
+}
+
+.puntos-paper-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  overflow-y: auto;
+  max-height: clamp(280px, 45vh, 420px);
+  padding-right: 0.3rem;
+}
+
+.puntos-category-box {
+  background: #FAF6EE;
+  padding: 0.9rem;
+  border-radius: 4px;
+  border-left: 3px solid var(--terracotta);
+}
+
+.puntos-category-box h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.92rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+
+.puntos-list-book {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.puntos-list-book li {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: #5a4a38;
+}
+
+.puntos-list-book strong {
+  display: block;
+  color: var(--ink);
+}
+
+.cesfam-chips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.cesfam-chip {
+  background: rgba(61, 43, 26, 0.06);
+  padding: 0.35rem 0.65rem;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  color: var(--ink);
+}
+
+.cesfam-chip.featured {
+  background: var(--terracotta);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+/* ── PLIEGO 4: Alianzas y Equipo ── */
+.alianzas-paper-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.alianza-col-mini {
+  background: #FAF6EE;
+  padding: 0.7rem 0.9rem;
+  border-radius: 4px;
+  border-left: 2px solid var(--terracotta);
+}
+
+.alianza-col-mini h4 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--terracotta);
+  margin-bottom: 0.2rem;
+}
+
+.alianza-col-mini p {
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--bark);
+  margin: 0;
+}
+
+.prensa-paper-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.prensa-paper-item {
+  display: flex;
+  flex-direction: column;
+  background: #FAF6EE;
+  padding: 0.65rem 0.85rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: 1px solid rgba(61, 43, 26, 0.08);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.prensa-paper-item:hover {
+  transform: translateX(3px);
+  border-color: var(--terracotta);
+}
+
+.prensa-paper-item strong {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--terracotta);
+}
+
+.prensa-paper-item span {
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+.team-paper-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  overflow-y: auto;
+  max-height: clamp(280px, 45vh, 420px);
+  padding-right: 0.3rem;
+}
+
+.team-member-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  background: #FAF6EE;
+  padding: 0.7rem 0.9rem;
+  border-radius: 4px;
+  border-left: 2px solid var(--terracotta);
+}
+
+.team-photo-frame {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.team-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.team-details h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.98rem;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.team-role-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.team-details p {
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: #5a4a38;
+  margin: 0;
+}
+
+/* ── PLIEGO 5: Colaborar y Registro ── */
+.colabora-paper-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.colabora-paper-entry {
+  background: #FAF6EE;
+  padding: 0.6rem 0.8rem;
+  border-radius: 4px;
+  border-left: 2px solid var(--terracotta);
+}
+
+.colabora-paper-entry strong {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--ink);
+  margin-bottom: 0.15rem;
+}
+
+.colabora-paper-entry p {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: #5a4a38;
+  margin: 0;
+}
+
+.btn-instagram-book {
+  display: inline-block;
+  background: var(--ink);
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-instagram-book:hover {
+  background: var(--terracotta);
+}
+
+.colabora-form-book {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.form-group-compact label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--bark);
+  font-weight: 700;
+}
+
+.form-group-compact input,
+.form-group-compact select,
+.form-group-compact textarea {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(61, 43, 26, 0.2);
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.8rem;
+  background: #FAF6EE;
+  color: var(--ink);
+}
   pointer-events: none;
   background: linear-gradient(90deg, rgba(28, 20, 9, 0.35) 0%, transparent 40%, rgba(28, 20, 9, 0.15) 100%);
   opacity: 0;
@@ -1540,92 +1839,69 @@ footer {
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1024px) {
   nav { padding: 0 2rem; }
-  #hero.popup-book-stage { 
-    height: auto;
+  .popup-book-viewport {
     min-height: auto;
-    margin-top: var(--header-height);
-    padding: 2.5rem 1.5rem 3rem; 
-    perspective: none; 
+    height: auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+  .popup-book-stage {
+    perspective: none;
   }
   .book-container { 
     height: auto;
     max-height: none;
+    min-height: auto;
     display: flex;
     flex-direction: column;
-    grid-template-columns: none;
     border-radius: 6px; 
-    box-shadow: 0 20px 40px rgba(28, 20, 9, 0.12); 
+    box-shadow: 0 15px 35px rgba(28, 20, 9, 0.12); 
     background: transparent;
   }
   .book-spine { display: none; }
-  .page-left { 
-    border-radius: 6px 6px 0 0; 
-    border-right: none; 
-    border-bottom: 1px solid rgba(61, 43, 26, 0.12); 
-    padding: 3rem 2rem; 
-  }
-  .book-leaf {
+  .book-spread {
     position: static;
-    width: 100%;
-    height: auto;
+    display: none;
+    grid-template-columns: 1fr;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
     transform: none !important;
-    transform-style: flat;
   }
-  .leaf-face {
-    position: static;
-    inset: auto;
-    backface-visibility: visible;
-    -webkit-backface-visibility: visible;
+  .book-spread.active {
+    display: flex;
+    flex-direction: column;
   }
-  .leaf-front {
-    border-radius: 0;
-    padding: 2.5rem 2rem;
+  .book-page { 
+    border-radius: 6px; 
+    border-right: none; 
+    padding: 2.2rem 1.6rem; 
+    height: auto;
+    overflow: visible;
+  }
+  .page-left {
+    border-radius: 6px 6px 0 0;
     border-bottom: 1px solid rgba(61, 43, 26, 0.12);
   }
-  .leaf-back {
-    transform: none;
-    border-radius: 0;
-    border-right: none;
-    border-bottom: 1px solid rgba(61, 43, 26, 0.12);
-    padding: 2.5rem 2rem;
-  }
-  .page-right-underlay {
+  .page-right {
     border-radius: 0 0 6px 6px;
-    padding: 2.5rem 2rem;
   }
-  .leaf-hint-turn, .leaf-shading { display: none; }
-  .activities-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .manifiesto { grid-template-columns: 1fr; gap: 2.5rem; }
-  .manifiesto-columnas { border-left: none; padding-left: 0; border-top: 1px solid rgba(245, 239, 224, 0.15); padding-top: 2rem; }
-  .alianzas-lista { grid-template-columns: repeat(2, 1fr); }
-  .project-featured-card { grid-template-columns: 1fr; }
-  .project-img-wrapper { min-height: 250px; }
-  .donacion-grid { grid-template-columns: 1fr; }
-  .prensa-grid { grid-template-columns: repeat(2, 1fr); }
+  .book-activities-scroll,
+  .puntos-paper-container,
+  .team-paper-grid {
+    max-height: none;
+    overflow-y: visible;
+  }
 }
 
 @media (max-width: 768px) {
-  nav { padding: 0 1.5rem; }
+  nav { padding: 0 1.2rem; }
   .nav-links { display: none; }
   .nav-toggle { display: flex; }
-  #hero.popup-book-stage { 
-    height: auto;
-    min-height: auto;
-    margin-top: var(--header-height);
-    padding: 1.8rem 1rem 2.5rem; 
-  }
-  .page-left { padding: 2rem 1.2rem; }
-  .leaf-front, .leaf-back, .page-right-underlay { padding: 2rem 1.2rem; }
-  .hero-stats { flex-direction: column; gap: 1rem; }
-  .activities-grid { grid-template-columns: 1fr; }
-  .alianzas-lista { grid-template-columns: 1fr; }
-  .team-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .book-page { padding: 1.8rem 1.2rem; }
+  .hero-stats { flex-direction: column; gap: 0.8rem; }
+  .cesfam-chips-grid { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-  .puntos-grid-2col { grid-template-columns: 1fr; }
-  .prensa-grid { grid-template-columns: 1fr; }
 }
 
 /* Modo Accesibilidad: Reducción de movimiento */
@@ -1636,7 +1912,7 @@ footer {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .book-container, .book-page, .book-leaf, .leaf-face, .popup-figure-layer, .popup-cutout, .popup-quote-card {
+  .book-container, .book-page, .book-spread, .popup-figure-layer, .popup-cutout, .popup-quote-card {
     transform: none !important;
   }
 }

@@ -162,202 +162,210 @@ if (colaboraForm) {
   });
 }
 
-// ─── Animacion Pop-Up 3D: Pliego Inicial del Libro (POC) ───
-function initPopUpBookHero() {
-  if (typeof gsap === 'undefined') return;
+// ══════════════════════════════════════════════════════════════
+// CONTROLADOR INTEGRAL DEL LIBRO POP-UP (6 PLIEGOS EDITORIALES)
+// ══════════════════════════════════════════════════════════════
+const BookController = {
+  currentSpread: 0,
+  totalSpreads: 6,
+  isAnimating: false,
+  spreads: [],
 
-  const stage = document.querySelector('.popup-book-stage');
-  const bookContainer = document.querySelector('.book-container');
-  const pageLeft = document.querySelector('.page-left');
-  const bookLeaf = document.getElementById('bookLeaf');
-  const leafFront = document.querySelector('.leaf-front');
-  const leafBack = document.querySelector('.leaf-back');
-  const figureLayer = document.querySelector('.popup-figure-layer');
-  const quoteCard = document.querySelector('.popup-quote-card');
-  const popupShadow = document.querySelector('.popup-shadow');
-  const leafShading = document.querySelector('.leaf-shading');
-  const underlayPage = document.querySelector('.page-right-underlay');
-  const manifiestoCards = document.querySelectorAll('.manifiesto-card');
+  init() {
+    this.spreads = Array.from(document.querySelectorAll('.book-spread'));
+    if (!this.spreads.length) return;
 
-  if (!stage || !bookContainer || !bookLeaf) return;
+    this.bindEvents();
+    this.initFirstSpreadAnimation();
+    this.updateNavState(0);
+  },
 
-  const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isDesktop = window.innerWidth > 1024;
+  bindEvents() {
+    // 1. Botones con data-go-spread (Pasar página / Volver / Botones de acción)
+    document.querySelectorAll('[data-go-spread]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = parseInt(btn.getAttribute('data-go-spread'), 10);
+        if (!isNaN(target)) {
+          this.goToSpread(target);
+        }
+      });
+    });
 
-  if (isReduced) return;
+    // 2. Enlaces de navegación principal (Desktop & Móvil)
+    const navMapping = {
+      '#': 0,
+      '#hero': 0,
+      '#fundacion': 1,
+      '#que-hacemos': 2,
+      '#proyectos': 3,
+      '#puntos-donacion': 3,
+      '#alianzas': 4,
+      '#equipo': 4,
+      '#colaborar': 5
+    };
 
-  if (isDesktop && typeof gsap !== 'undefined') {
-    if (typeof ScrollTrigger !== 'undefined') {
-      gsap.registerPlugin(ScrollTrigger);
+    document.querySelectorAll('.nav-links a, .nav-menu-mobile a, .nav-logo').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (href && navMapping[href] !== undefined) {
+          e.preventDefault();
+          this.goToSpread(navMapping[href]);
+
+          // Si el menú móvil está abierto, cerrarlo
+          if (typeof navMenuMobile !== 'undefined' && navMenuMobile.classList.contains('open')) {
+            navMenuMobile.classList.remove('open');
+            if (typeof navToggle !== 'undefined') navToggle.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+        }
+      });
+    });
+
+    // 3. Navegación con teclado (Flechas Izquierda / Derecha)
+    document.addEventListener('keydown', (e) => {
+      // Ignorar si el usuario está escribiendo en el formulario o modal abierto
+      if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
+      if (document.getElementById('activityModal')?.classList.contains('open')) return;
+
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+        if (this.currentSpread < this.totalSpreads - 1) this.goToSpread(this.currentSpread + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        if (this.currentSpread > 0) this.goToSpread(this.currentSpread - 1);
+      }
+    });
+
+    // 4. Efecto de inclinación 3D sutil con el cursor (Parallax en el libro)
+    const stage = document.getElementById('bookStage');
+    const container = document.getElementById('bookContainer');
+    if (stage && container && window.innerWidth > 1024) {
+      stage.addEventListener('mousemove', (e) => {
+        const rect = stage.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        gsap.to(container, {
+          rotateY: x * 4,
+          rotateX: -y * 4,
+          duration: 0.8,
+          ease: 'power1.out'
+        });
+      });
+
+      stage.addEventListener('mouseleave', () => {
+        gsap.to(container, { rotateX: 0, rotateY: 0, duration: 1, ease: 'power2.out' });
+      });
     }
+  },
 
-    // 1. Estado inicial de apertura física al cargar la página
-    gsap.set(bookContainer, { rotateX: 6, rotateY: -3, z: -40 });
-    gsap.set(pageLeft, { rotateY: 10 });
-    gsap.set(bookLeaf, { rotateY: 0, transformOrigin: 'left center' });
-    if (figureLayer) gsap.set(figureLayer, { rotateX: -65, z: 0, opacity: 0 });
+  goToSpread(targetIndex) {
+    if (targetIndex === this.currentSpread || this.isAnimating) return;
+    if (targetIndex < 0 || targetIndex >= this.totalSpreads) return;
+
+    this.isAnimating = true;
+    const currentEl = this.spreads[this.currentSpread];
+    const targetEl = this.spreads[targetIndex];
+    const goingForward = targetIndex > this.currentSpread;
+
+    const isDesktop = window.innerWidth > 1024;
+    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (isDesktop && !isReduced && typeof gsap !== 'undefined') {
+      // Transición física 3D de paso de página
+      const tl = gsap.timeline({
+        onComplete: () => {
+          currentEl.classList.remove('active');
+          targetEl.classList.add('active');
+          this.currentSpread = targetIndex;
+          this.updateNavState(targetIndex);
+          this.isAnimating = false;
+
+          // Si entramos al pliego 0, erguir a Gabriela Mistral
+          if (targetIndex === 0) this.initFirstSpreadAnimation();
+        }
+      });
+
+      // Efecto de levantamiento y giro de la hoja
+      tl.to(currentEl, {
+        opacity: 0,
+        scale: 0.98,
+        rotateY: goingForward ? -8 : 8,
+        duration: 0.35,
+        ease: 'power2.in'
+      })
+      .set(currentEl, { visibility: 'hidden' })
+      .set(targetEl, {
+        visibility: 'visible',
+        opacity: 0,
+        scale: 0.98,
+        rotateY: goingForward ? 8 : -8
+      })
+      .to(targetEl, {
+        opacity: 1,
+        scale: 1,
+        rotateY: 0,
+        duration: 0.45,
+        ease: 'power2.out'
+      });
+
+    } else {
+      // Cambio instantáneo limpio para móviles o movimiento reducido
+      currentEl.classList.remove('active');
+      targetEl.classList.add('active');
+      this.currentSpread = targetIndex;
+      this.updateNavState(targetIndex);
+      this.isAnimating = false;
+
+      // Scroll suave hacia la parte superior del libro en móvil
+      const stage = document.getElementById('bookStage');
+      if (stage) {
+        stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  },
+
+  initFirstSpreadAnimation() {
+    if (typeof gsap === 'undefined') return;
+    const figureLayer = document.querySelector('.popup-figure-layer');
+    const quoteCard = document.querySelector('.popup-quote-card');
+    const popupShadow = document.querySelector('.popup-shadow');
+
+    if (!figureLayer) return;
+
+    gsap.set(figureLayer, { rotateX: -65, z: 0, opacity: 0 });
     if (quoteCard) gsap.set(quoteCard, { rotateX: -30, z: 5, opacity: 0 });
     if (popupShadow) gsap.set(popupShadow, { scaleX: 0.4, opacity: 0 });
 
-    const openTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    openTl.to(pageLeft, { rotateY: 0, duration: 1.2, delay: 0.15 })
-      .to(bookContainer, { rotateX: 0, rotateY: 0, z: 0, duration: 1.3 }, '<')
-      .to(figureLayer, { rotateX: 0, z: 35, opacity: 1, duration: 1.1, ease: 'back.out(1.4)' }, '-=0.8')
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .to(figureLayer, { rotateX: 0, z: 35, opacity: 1, duration: 1.1, ease: 'back.out(1.4)', delay: 0.1 })
       .to(popupShadow, { scaleX: 1, opacity: 1, duration: 1.1 }, '<')
       .to(quoteCard, { rotateX: 0, z: 22, opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.6');
+  },
 
-    // 2. Efecto Paso de Hoja 3D (Page-Flip) vinculado a ScrollTrigger
-    if (typeof ScrollTrigger !== 'undefined') {
-      const flipTl = gsap.timeline({
-        scrollTrigger: {
-          id: 'bookFlipTrigger',
-          trigger: '#hero',
-          start: 'top 84px',
-          end: '+=800',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1
-        }
-      });
+  updateNavState(index) {
+    // Sincronizar estilo activo en los enlaces del navbar
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => link.classList.remove('active'));
 
-      // Paso de página progresivo:
-      flipTl
-        // La figura pop-up y la cita se pliegan al despegar la hoja
-        .to(figureLayer, {
-          rotateX: -75,
-          z: 5,
-          opacity: 0.2,
-          duration: 0.35,
-          ease: 'power2.in'
-        }, 0)
-        .to(quoteCard, {
-          rotateX: -40,
-          z: 2,
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.in'
-        }, 0)
-        // La hoja gira 180 grados hacia la izquierda sobre el lomo
-        .to(bookLeaf, {
-          rotateY: -180,
-          duration: 1,
-          ease: 'power1.inOut'
-        }, 0)
-        // Sombra de flexión y relieve que sube hasta el punto vertical y luego se disipa
-        .to(leafShading, {
-          opacity: 0.85,
-          duration: 0.45,
-          ease: 'power2.in'
-        }, 0.05)
-        .to(leafShading, {
-          opacity: 0,
-          duration: 0.45,
-          ease: 'power2.out'
-        }, 0.55)
-        // Aparecen las tarjetas de Misión y Visión de la página que quedó revelada
-        .from(manifiestoCards, {
-          y: 20,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 0.4,
-          ease: 'power2.out'
-        }, 0.6);
-    }
-
-    // 3. Microinteracción de paralaje sutil con el cursor (cuando el libro está en reposo)
-    stage.addEventListener('mousemove', (e) => {
-      // Solo mover si la hoja está cerrada o casi cerrada
-      const currentRot = gsap.getProperty(bookLeaf, 'rotateY');
-      if (Math.abs(currentRot) > 30) return;
-
-      const rect = stage.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-      gsap.to(bookContainer, {
-        rotateY: x * 3.5,
-        rotateX: -y * 3.5,
-        duration: 0.8,
-        ease: 'power1.out'
-      });
-
-      if (figureLayer && currentRot > -20) {
-        gsap.to(figureLayer, {
-          x: x * 8,
-          rotateY: x * 5,
-          duration: 0.6,
-          ease: 'power1.out'
-        });
-      }
-    });
-
-    stage.addEventListener('mouseleave', () => {
-      gsap.to(bookContainer, { rotateX: 0, rotateY: 0, duration: 1, ease: 'power2.out' });
-      if (figureLayer) gsap.to(figureLayer, { x: 0, rotateY: 0, duration: 1, ease: 'power2.out' });
-    });
-
-    // 4. Soporte para enlaces directos y botones de pasar/volver página
-    const btnNextLeaf = document.getElementById('btnNextLeaf');
-    const btnPrevLeaf = document.getElementById('btnPrevLeaf');
-
-    const scrollToPageFlipped = () => {
-      const trigger = ScrollTrigger.getById('bookFlipTrigger') || ScrollTrigger.getAll()[0];
-      if (trigger) {
-        window.scrollTo({
-          top: trigger.end + 10,
-          behavior: 'smooth'
-        });
-      }
+    const spreadToHash = {
+      0: '#hero',
+      1: '#fundacion',
+      2: '#que-hacemos',
+      3: '#proyectos',
+      4: '#alianzas',
+      5: '#colaborar'
     };
 
-    const scrollToCover = () => {
-      const trigger = ScrollTrigger.getById('bookFlipTrigger') || ScrollTrigger.getAll()[0];
-      if (trigger) {
-        window.scrollTo({
-          top: trigger.start,
-          behavior: 'smooth'
-        });
-      }
-    };
-
-    if (btnNextLeaf) btnNextLeaf.addEventListener('click', scrollToPageFlipped);
-    if (btnPrevLeaf) btnPrevLeaf.addEventListener('click', scrollToCover);
-
-    const navFundacionLinks = document.querySelectorAll('a[href="#fundacion"]');
-    navFundacionLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          scrollToPageFlipped();
-        }
-      });
-    });
-
-  } else {
-    // Modo Móvil / Tablet: Entrada natural vertical sin distorsiones 3D
-    gsap.from([pageLeft, leafFront, leafBack, underlayPage], {
-      opacity: 0,
-      y: 20,
-      duration: 0.7,
-      stagger: 0.15,
-      ease: 'power2.out'
-    });
-    if (figureLayer) {
-      gsap.from(figureLayer, {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.8,
-        delay: 0.2,
-        ease: 'back.out(1.2)'
-      });
+    const targetHash = spreadToHash[index];
+    if (targetHash) {
+      document.querySelectorAll(`.nav-links a[href="${targetHash}"]`).forEach(l => l.classList.add('active'));
     }
   }
-}
+};
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initPopUpBookHero);
+  document.addEventListener('DOMContentLoaded', () => BookController.init());
 } else {
-  initPopUpBookHero();
+  BookController.init();
 }
 
