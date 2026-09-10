@@ -212,11 +212,11 @@ function initPopUpBookHero() {
       const flipTl = gsap.timeline({
         scrollTrigger: {
           id: 'bookFlipTrigger',
-          trigger: '#libro-experiencia',
-          start: 'top top+=84',
-          end: '+=900',
+          trigger: '#hero',
+          start: 'top 84px',
+          end: '+=800',
           pin: true,
-          scrub: 1.2,
+          scrub: 1,
           anticipatePin: 1
         }
       });
@@ -297,19 +297,39 @@ function initPopUpBookHero() {
       if (figureLayer) gsap.to(figureLayer, { x: 0, rotateY: 0, duration: 1, ease: 'power2.out' });
     });
 
-    // 4. Soporte para enlaces directos a #fundacion desde la barra de navegación
+    // 4. Soporte para enlaces directos y botones de pasar/volver página
+    const btnNextLeaf = document.getElementById('btnNextLeaf');
+    const btnPrevLeaf = document.getElementById('btnPrevLeaf');
+
+    const scrollToPageFlipped = () => {
+      const trigger = ScrollTrigger.getById('bookFlipTrigger') || ScrollTrigger.getAll()[0];
+      if (trigger) {
+        window.scrollTo({
+          top: trigger.end + 10,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    const scrollToCover = () => {
+      const trigger = ScrollTrigger.getById('bookFlipTrigger') || ScrollTrigger.getAll()[0];
+      if (trigger) {
+        window.scrollTo({
+          top: trigger.start,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    if (btnNextLeaf) btnNextLeaf.addEventListener('click', scrollToPageFlipped);
+    if (btnPrevLeaf) btnPrevLeaf.addEventListener('click', scrollToCover);
+
     const navFundacionLinks = document.querySelectorAll('a[href="#fundacion"]');
     navFundacionLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         if (window.innerWidth > 1024) {
           e.preventDefault();
-          const trigger = ScrollTrigger.getById('bookFlipTrigger') || ScrollTrigger.getAll()[0];
-          if (trigger) {
-            window.scrollTo({
-              top: trigger.end - 50,
-              behavior: 'smooth'
-            });
-          }
+          scrollToPageFlipped();
         }
       });
     });

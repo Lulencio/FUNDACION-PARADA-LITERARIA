@@ -364,19 +364,17 @@ nav {
   background: #F4EEDF;
   box-shadow: inset 25px 0 35px -15px rgba(28, 20, 9, 0.12);
   padding: clamp(1.4rem, 2.8vh, 2.4rem) clamp(1.5rem, 2.5vw, 2.5rem);
-  z-index: 2;
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) translateZ(1px);
 }
 
 /* Cara Trasera (Reverso - Manifiesto) */
 .leaf-back {
   background: #FAF6EE;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   border-radius: 6px 0 0 6px;
   border-right: 1px solid rgba(61, 43, 26, 0.12);
   box-shadow: inset -25px 0 35px -15px rgba(28, 20, 9, 0.1);
   padding: clamp(1.6rem, 3vh, 2.5rem) clamp(1.8rem, 2.8vw, 2.6rem);
-  z-index: 1;
 }
 
 /* Contenido del Manifiesto en la cara trasera */
@@ -429,22 +427,51 @@ nav {
   margin: 0;
 }
 
-/* Indicador sutil de pasar página */
-.leaf-hint-turn {
+/* Botones de pasar y devolver página tipo lengüeta artesanal */
+.btn-turn-leaf {
   margin-top: clamp(0.6rem, 1.2vh, 1rem);
-  text-align: center;
-  font-size: 0.68rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--terracotta);
+  background: var(--terracotta);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  padding: 0.55rem 1.1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
   font-weight: 700;
-  opacity: 0.8;
-  animation: pulseHint 2.4s infinite ease-in-out;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 12px rgba(196, 87, 26, 0.25);
+  transition: all 0.25s ease;
+  pointer-events: auto;
+  align-self: center;
 }
 
-@keyframes pulseHint {
-  0%, 100% { opacity: 0.6; transform: translateX(0); }
-  50% { opacity: 1; transform: translateX(4px); }
+.btn-turn-leaf:hover {
+  background: #A0390F;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(196, 87, 26, 0.35);
+}
+
+.prev-leaf-btn {
+  background: transparent;
+  color: var(--bark);
+  border: 1px solid rgba(61, 43, 26, 0.25);
+  box-shadow: none;
+  margin-top: clamp(0.8rem, 1.4vh, 1.2rem);
+  align-self: flex-start;
+}
+
+.prev-leaf-btn:hover {
+  background: rgba(61, 43, 26, 0.06);
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+  transform: translateY(-2px);
+  box-shadow: none;
 }
 
 /* Sombra dinámica de flexión de hoja */
