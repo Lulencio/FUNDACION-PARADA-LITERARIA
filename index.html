@@ -63,531 +63,525 @@
         <div class="book-spine"></div>
 
         <!-- ─────────────────────────────────────────────────────────── -->
-        <!-- PLIEGO 0: PORTADA & HERO (Bienvenida, Cifras y Gabriela Mistral) -->
+        <!-- PÁGINA 0: PORTADA HERO IZQUIERDA (data-density="hard")         -->
         <!-- ─────────────────────────────────────────────────────────── -->
-        <section class="book-spread spread-0 active" id="pliego-0" data-spread="0" data-title="Portada">
-          <!-- Página Izquierda -->
-          <div class="book-page page-left">
-            <div class="page-content">
-              <div class="hero-eyebrow">Fundación Cultural · Rancagua, Chile</div>
-              <h1 class="hero-title">
-                Libros y cultura comunitaria<br>en los barrios de <em>Rancagua</em>
-              </h1>
-              <p class="hero-subtitle">Ponemos libros donde la gente espera, formamos mediadores y creamos talleres artísticos en la Región de O'Higgins</p>
-              <p class="hero-desc">
-                Desde 2023, la <strong>Fundación Parada Literaria</strong> lleva bibliotecas libres a los centros de salud, capacita a educadores en fomento lector y desarrolla experiencias artísticas con las comunidades de Rancagua y la región.
-              </p>
+        <div class="book-page page-left" id="hero-page" data-density="hard" data-page-num="0">
+          <div class="page-content">
+            <div class="hero-eyebrow">Fundación Cultural · Rancagua, Chile</div>
+            <h1 class="hero-title">
+              Libros y cultura comunitaria<br>en los barrios de <em>Rancagua</em>
+            </h1>
+            <p class="hero-subtitle">Ponemos libros donde la gente espera, formamos mediadores y creamos talleres artísticos en la Región de O'Higgins</p>
+            <p class="hero-desc">
+              Desde 2023, la <strong>Fundación Parada Literaria</strong> lleva bibliotecas libres a los centros de salud, capacita a educadores en fomento lector y desarrolla experiencias artísticas con las comunidades de Rancagua y la región.
+            </p>
 
-              <div class="hero-actions">
-                <button type="button" class="btn-primary" data-go-spread="2">Conoce nuestro trabajo</button>
-                <button type="button" class="btn-secondary" data-go-spread="3">Dónde donar libros</button>
+            <div class="hero-actions">
+              <button type="button" class="btn-primary" data-go-page="4">Conoce nuestro trabajo</button>
+              <button type="button" class="btn-secondary" data-go-page="6">Dónde donar libros</button>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number">7</div>
+                <div class="stat-label">centros de salud con biblioteca</div>
               </div>
-
-              <div class="hero-stats">
-                <div class="stat-item">
-                  <div class="stat-number">7</div>
-                  <div class="stat-label">centros de salud con biblioteca</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">+25.000</div>
-                  <div class="stat-label">libros recibidos en donación</div>
-                </div>
-                <div class="stat-item">
-                  <div class="stat-number">+16.000</div>
-                  <div class="stat-label">libros puestos en circulación</div>
-                </div>
+              <div class="stat-item">
+                <div class="stat-number">+25.000</div>
+                <div class="stat-label">libros recibidos en donación</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number">+16.000</div>
+                <div class="stat-label">libros puestos en circulación</div>
               </div>
             </div>
           </div>
-
-          <!-- Página Derecha (Diorama Pop-up de Gabriela Mistral) -->
-          <div class="book-page page-right">
-            <div class="page-background-fold"></div>
-            <div class="page-content right-content">
-              <div class="popup-layer popup-figure-layer">
-                <div class="popup-pedestal"></div>
-                <img src="img/gabriela.png" alt="Gabriela Mistral — Inspiración del proyecto" class="popup-cutout mistral-img">
-                <div class="popup-shadow"></div>
-              </div>
-
-              <div class="popup-layer popup-quote-card">
-                <p>"Hacer leer como se come todos los días, hasta que la lectura sea como el mirar un ejercicio natural, pero gozoso siempre."</p>
-                <cite>
-                  — Gabriela Mistral
-                  <span>Poeta, Educadora y Premio Nobel</span>
-                </cite>
-              </div>
-
-              <div class="page-nav-controls">
-                <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-spread="1" aria-label="Pasar al siguiente pliego: Quiénes somos">
-                  <span>Pasar página: Quiénes somos →</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
 
         <!-- ─────────────────────────────────────────────────────────── -->
-        <!-- PLIEGO 1: QUIÉNES SOMOS (Manifiesto, Misión & Visión)      -->
+        <!-- PÁGINA 1: HERO DERECHA - DIORAMA GABRIELA MISTRAL (hard)   -->
         <!-- ─────────────────────────────────────────────────────────── -->
-        <section class="book-spread spread-1" id="fundacion" data-spread="1" data-title="Fundación">
-          <!-- Página Izquierda (Manifiesto Editorial) -->
-          <div class="book-page page-left">
-            <div class="page-content fundacion-manifesto-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Manifiesto Editorial</span>
-                <h2 class="section-title">Quiénes <em>somos</em></h2>
-              </div>
-              <div class="manifiesto-texto-book">
-                <p class="manifiesto-intro">Nacimos en 2023 con una idea sencilla: que los libros estén donde la gente los necesita, no solo donde se espera encontrarlos.</p>
-                <p>Somos un equipo de mediadoras, artistas y educadoras de la Región de O'Higgins que lleva bibliotecas libres a centros de salud, forma mediadores de lectura y crea talleres artísticos en comunidades que históricamente han quedado lejos de la oferta cultural.</p>
-                <p>Creemos que la lectura es un derecho cotidiano. Que un libro en una sala de espera puede cambiar una tarde difícil. Que una capacitación a una educadora rural multiplica lectores. Que un taller textil con mujeres de la región puede terminar expuesto en el Museo Regional.</p>
-              </div>
-              <div class="page-nav-controls">
-                <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-spread="0" aria-label="Volver a la portada">
-                  <span>← Portada</span>
-                </button>
-              </div>
+        <div class="book-page page-right" data-density="hard" data-page-num="1">
+          <div class="page-background-fold"></div>
+          <div class="page-content right-content">
+            <div class="popup-layer popup-figure-layer">
+              <div class="popup-pedestal"></div>
+              <img src="img/gabriela.png" alt="Gabriela Mistral — Inspiración del proyecto" class="popup-cutout mistral-img">
+              <div class="popup-shadow"></div>
             </div>
-          </div>
 
-          <!-- Página Derecha (Misión y Visión con tarjetas de papel) -->
-          <div class="book-page page-right">
-            <div class="page-background-fold"></div>
-            <div class="page-content fundacion-right-content">
-              <div class="manifiesto-columnas-book">
-                <div class="manifiesto-card card-mision">
-                  <div class="card-tag">Propósito Territorial</div>
-                  <h3>Misión</h3>
-                  <p>Promover el acceso equitativo a la cultura, la lectura y el conocimiento mediante proyectos de mediación lectora, innovación social y participación comunitaria, derribando barreras socioeconómicas y fortaleciendo el bienestar integral de los territorios.</p>
-                </div>
-                <div class="manifiesto-card card-vision">
-                  <div class="card-tag">Horizonte Comunitario</div>
-                  <h3>Visión</h3>
-                  <p>Ser una organización referente en Chile por su capacidad de transformar comunidades a través de la lectura, consolidando en la Región de O'Higgins la red de circulación bibliográfica y mediación comunitaria más grande y activa del país.</p>
-                </div>
-              </div>
-              <div class="page-nav-controls page-nav-split">
-                <span class="spread-indicator">Pliego I · Identidad</span>
-                <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-spread="2" aria-label="Pasar a Actividades">
-                  <span>Actividades →</span>
-                </button>
-              </div>
+            <div class="popup-layer popup-quote-card">
+              <p>"Hacer leer como se come todos los días, hasta que la lectura sea como el mirar un ejercicio natural, pero gozoso siempre."</p>
+              <cite>
+                — Gabriela Mistral
+                <span>Poeta, Educadora y Premio Nobel</span>
+              </cite>
+            </div>
+
+            <div class="page-nav-controls">
+              <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-page="2" aria-label="Pasar al siguiente pliego: Quiénes somos">
+                <span>Pasar página: Quiénes somos →</span>
+              </button>
             </div>
           </div>
-        </section>
+        </div>
 
         <!-- ─────────────────────────────────────────────────────────── -->
-        <!-- PLIEGO 2: QUÉ HACEMOS (Líneas de Acción, Formación & Talleres) -->
+        <!-- PÁGINA 2: QUIÉNES SOMOS - MANIFIESTO IZQUIERDA             -->
         <!-- ─────────────────────────────────────────────────────────── -->
-        <section class="book-spread spread-2" id="que-hacemos" data-spread="2" data-title="Qué Hacemos">
-          <!-- Página Izquierda (Formación y Diálogo) -->
-          <div class="book-page page-left">
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Líneas de Acción</span>
-                <h2 class="section-title">Nuestras <em>actividades</em></h2>
-                <p class="section-desc-compact">Formación para mediadores, talleres comunitarios y material didáctico hecho a mano.</p>
-              </div>
-
-              <!-- Filtros de categoría dentro del pliego -->
-              <div class="category-bubbles-book">
-                <button class="bubble-btn active" data-category="all">Todo</button>
-                <button class="bubble-btn" data-category="formacion">Formación</button>
-                <button class="bubble-btn" data-category="materiales">Materiales</button>
-                <button class="bubble-btn" data-category="talleres">Talleres</button>
-              </div>
-
-              <div class="book-activities-scroll">
-                <!-- Actividad 1 -->
-                <article class="activity-card featured" data-category="formacion" data-title="Foro Literario 2025: LIJ en Diálogo" data-tag="Formación Especializada" data-desc="Ciclo formativo inédito de 8 charlas con destacadas académicas y especialistas en Literatura Infantil y Juvenil en Chile (Constanza Ried, Carola Vesely, Isabel Ibaceta, Verónica Vives, Andrea Bravo, Claudia Andrade, Hugo Hinojosa y Lily Vergara). Desarrollado en la Biblioteca Pública N°34 de Rancagua, financiado por el Fondo Nacional del Libro y la Lectura 2025." data-img="img/cesfam6.jpg">
-                  <div class="activity-tag">Formación · Fondo del Libro</div>
-                  <h3 class="activity-title">Foro Literario 2025: LIJ en Diálogo</h3>
-                  <p class="activity-desc">8 conferencias magistrales con especialistas nacionales para formar a mediadores y educadores.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver programa →</span></div>
-                </article>
-
-                <!-- Actividad 2 -->
-                <article class="activity-card" data-category="formacion" data-title="Ciclo de Coloquios y Charlas de Inclusión" data-tag="Formación Continua" data-desc="Charlas formativas sobre fomento y mediación lectora como herramienta de inclusión social, innovación y salud integral. Espacios de reflexión dirigidos a funcionarios de salud, docentes y comunidades educativas." data-img="img/cesfam6.jpg">
-                  <div class="activity-tag">Formación & Diálogo</div>
-                  <h3 class="activity-title">Ciclo de Coloquios y Charlas</h3>
-                  <p class="activity-desc">Encuentros sobre mediación lectora como derecho cultural, inclusión y bienestar en salud.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver charlas →</span></div>
-                </article>
-
-                <!-- Actividad 3 -->
-                <article class="activity-card" data-category="materiales" data-title="Mandiles Didácticos Cuentacuentos" data-tag="Material Creativo Exclusivo" data-desc="Creación textil artesanal de soportes escénicos desplegables que transforman el cuerpo del mediador en un escenario narrativo. Incluye jornadas de capacitación para bibliotecarias y mediadoras de toda la Región de O'Higgins." data-img="img/gabriela.png">
-                  <div class="activity-tag">Material Creativo</div>
-                  <h3 class="activity-title">Mandiles Didácticos Cuentacuentos</h3>
-                  <p class="activity-desc">Soportes textiles escénicos artesanales para enriquecer la narración oral.</p>
-                  <div class="activity-footer"><span class="btn-link">Conocer mandiles →</span></div>
-                </article>
-
-                <!-- Actividad 4 -->
-                <article class="activity-card" data-category="materiales" data-title="Libros Pop-Up Gigantes y Teatro Lambe-Lambe" data-tag="Innovación Didáctica" data-desc="Diseño y confección de libros tridimensionales de gran formato y dispositivos de teatro en miniatura (Lambe-Lambe), que convierten el acto de leer en una experiencia visual, sensorial e inmersiva." data-img="img/gabriela.png">
-                  <div class="activity-tag">Material Creativo</div>
-                  <h3 class="activity-title">Libros Pop-Up Gigantes & Lambe-Lambe</h3>
-                  <p class="activity-desc">Estructuras tridimensionales y teatro íntimo en miniatura.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver materiales →</span></div>
-                </article>
-              </div>
-
-              <div class="page-nav-controls">
-                <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-spread="1" aria-label="Volver a Quiénes somos">
-                  <span>← Quiénes somos</span>
-                </button>
-              </div>
+        <div class="book-page page-left" id="fundacion" data-density="soft" data-page-num="2">
+          <div class="page-content fundacion-manifesto-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Manifiesto Editorial</span>
+              <h2 class="section-title">Quiénes <em>somos</em></h2>
+            </div>
+            <div class="manifiesto-texto-book">
+              <p class="manifiesto-intro">Nacimos en 2023 con una idea sencilla: que los libros estén donde la gente los necesita, no solo donde se espera encontrarlos.</p>
+              <p>Somos un equipo de mediadoras, artistas y educadoras de la Región de O'Higgins que lleva bibliotecas libres a centros de salud, forma mediadores de lectura y crea talleres artísticos en comunidades que históricamente han quedado lejos de la oferta cultural.</p>
+              <p>Creemos que la lectura es un derecho cotidiano. Que un libro en una sala de espera puede cambiar una tarde difícil. Que una capacitación a una educadora rural multiplica lectores. Que un taller textil con mujeres de la región puede terminar expuesto en el Museo Regional.</p>
+            </div>
+            <div class="page-nav-controls">
+              <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-page="0" aria-label="Volver a la portada">
+                <span>← Portada</span>
+              </button>
             </div>
           </div>
-
-          <!-- Página Derecha (Talleres Comunitarios y Mural) -->
-          <div class="book-page page-right">
-            <div class="page-background-fold"></div>
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Creación Territorial</span>
-                <h3 class="page-subtitle">Talleres y Encuentros en el Barrio</h3>
-              </div>
-
-              <div class="book-activities-scroll">
-                <!-- Actividad 5 -->
-                <article class="activity-card featured" data-category="talleres" data-title="Hilando Historias con Gabriela Mistral" data-tag="Taller Textil Comunitario" data-desc="Taller de mediación literaria y creación colectiva textil en homenaje a los 80 años del Premio Nobel. 19 mujeres de la Región de O'Higgins bordaron sus historias personales en diálogo con la poesía mistraliana, culminando en un gran mural colectivo expuesto en el Museo Regional de Rancagua con financiamiento SERPAT." data-img="img/gabriela.png">
-                  <div class="activity-tag">Taller & Mural Museo</div>
-                  <h3 class="activity-title">Hilando con Gabriela Mistral</h3>
-                  <p class="activity-desc">Mural textil colectivo de 19 mujeres expuesto en el Museo Regional de Rancagua.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver mural colectivo →</span></div>
-                </article>
-
-                <!-- Actividad 6 -->
-                <article class="activity-card" data-category="talleres" data-title="Navegando entre Preguntas: Creación Artístico-Literaria" data-tag="Taller Infantil" data-desc="Taller de creación artístico-literaria infantil realizado en el Museo Regional de Rancagua en el marco del 'Libro de las Preguntas' de Pablo Neruda con la visita de la destacada ilustradora nacional Paloma Valdivia." data-img="img/cesfam6.jpg">
-                  <div class="activity-tag">Infancia & Arte</div>
-                  <h3 class="activity-title">Navegando entre Preguntas</h3>
-                  <p class="activity-desc">Taller de arte y literatura infantil junto a Paloma Valdivia.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver taller infantil →</span></div>
-                </article>
-
-                <!-- Actividad 7 -->
-                <article class="activity-card" data-category="talleres" data-title="Maratones de Cuentacuentos y Patrimonio Lingüístico" data-tag="Intervención Territorial" data-desc="Intervenciones de narración oral y mediación territorial en el Día de los Patrimonios, fiestas comunitarias e inauguración de la Guaguateca de la Biblioteca Pública N°34." data-img="img/cesfam6.jpg">
-                  <div class="activity-tag">Comunidad & Patrimonio</div>
-                  <h3 class="activity-title">Cuentacuentos & Patrimonio</h3>
-                  <p class="activity-desc">Narraciones orales situadas y rescate lingüístico en barrios.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver maratones →</span></div>
-                </article>
-
-                <!-- Actividad 8 -->
-                <article class="activity-card" data-category="talleres" data-title="Mediación Lectora Familiar en Escuelas" data-tag="Vínculo Escolar" data-desc="Clases prácticas de mediación lectora y estrategias de animación del libro en el entorno familiar para madres, padres y apoderados, realizadas en alianza con la Biblioteca Pública 251 en el Colegio René Schneider." data-img="img/cesfam6.jpg">
-                  <div class="activity-tag">Escuela & Familia</div>
-                  <h3 class="activity-title">Mediación en Escuelas</h3>
-                  <p class="activity-desc">Estrategias prácticas para padres en fomento lector hogareño.</p>
-                  <div class="activity-footer"><span class="btn-link">Ver mediación escolar →</span></div>
-                </article>
-              </div>
-
-              <div class="page-nav-controls page-nav-split">
-                <span class="spread-indicator">Pliego II · Actividades</span>
-                <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-spread="3" aria-label="Pasar a Módulos CESFAM y Puntos de Donación">
-                  <span>Módulos CESFAM →</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
 
         <!-- ─────────────────────────────────────────────────────────── -->
-        <!-- PLIEGO 3: MÓDULOS EN CESFAM & PUNTOS DE DONACIÓN           -->
+        <!-- PÁGINA 3: QUIÉNES SOMOS - MISIÓN & VISIÓN DERECHA          -->
         <!-- ─────────────────────────────────────────────────────────── -->
-        <section class="book-spread spread-3" id="proyectos" data-spread="3" data-title="Módulos CESFAM">
-          <!-- Página Izquierda (Proyecto Insignia CESFAM N° 6) -->
-          <div class="book-page page-left">
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Salud y Cultura</span>
-                <h2 class="section-title">Bibliotecas en <em>CESFAM</em></h2>
-                <p class="section-desc-compact">Puntos de lectura abierta en salas de espera de salud pública.</p>
+        <div class="book-page page-right" data-density="soft" data-page-num="3">
+          <div class="page-background-fold"></div>
+          <div class="page-content fundacion-right-content">
+            <div class="manifiesto-columnas-book">
+              <div class="manifiesto-card card-mision">
+                <div class="card-tag">Propósito Territorial</div>
+                <h3>Misión</h3>
+                <p>Promover el acceso equitativo a la cultura, la lectura y el conocimiento mediante proyectos de mediación lectora, innovación social y participación comunitaria, derribando barreras socioeconómicas y fortaleciendo el bienestar integral de los territorios.</p>
               </div>
-
-              <div class="project-paper-card">
-                <div class="project-photo-frame">
-                  <img src="img/cesfam6.jpg" alt="Módulo inaugural en CESFAM N° 6 Ignacio Caroca">
-                  <span class="photo-caption-tag">Hito Inaugural · Rancagua</span>
-                </div>
-                <div class="project-paper-body">
-                  <div class="project-location">CESFAM N° 6 Ignacio Caroca</div>
-                  <blockquote class="project-quote-book">
-                    "Porque en el fondo todo es lo mismo: el viaje, el amor, la lectura; una misma aventura donde nuestro paisaje interior se trastorna."
-                    <cite>— Michèle Petit</cite>
-                  </blockquote>
-                  <p class="project-text-book">
-                    Las personas pueden tomar un libro prestado libremente, leerlo durante su tiempo de espera o intercambiarlo por uno propio.
-                  </p>
-                </div>
-              </div>
-
-              <div class="page-nav-controls">
-                <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-spread="2" aria-label="Volver a Actividades">
-                  <span>← Actividades</span>
-                </button>
+              <div class="manifiesto-card card-vision">
+                <div class="card-tag">Horizonte Comunitario</div>
+                <h3>Visión</h3>
+                <p>Ser una organización referente en Chile por su capacidad de transformar comunidades a través de la lectura, consolidando en la Región de O'Higgins la red de circulación bibliográfica y mediación comunitaria más grande y activa del país.</p>
               </div>
             </div>
-          </div>
-
-          <!-- Página Derecha (Red de 9 Puntos de Donación) -->
-          <div class="book-page page-right" id="puntos-donacion">
-            <div class="page-background-fold"></div>
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Red Territorial Rancagua</span>
-                <h2 class="section-title">Dónde <em>donar</em> libros</h2>
-                <p class="section-desc-compact">9 puntos oficiales para donar y disfrutar la lectura libre en la ciudad:</p>
-              </div>
-
-              <div class="puntos-paper-container">
-                <div class="puntos-category-box">
-                  <h4>Bibliotecas Públicas (Centros de Acopio y Clasificación)</h4>
-                  <ul class="puntos-list-book">
-                    <li>
-                      <strong>Biblioteca Pública N° 34 Eduardo de Geyter</strong>
-                      <span>Avenida Cachapoal 090, Rancagua</span>
-                    </li>
-                    <li>
-                      <strong>Biblioteca Pública N° 251 Santiago Benadava Cattán</strong>
-                      <span>Av. La Compañía 159, Rancagua (Taller de etiquetado)</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="puntos-category-box">
-                  <h4>Módulos en Salas de Espera CESFAM</h4>
-                  <div class="cesfam-chips-grid">
-                    <span class="cesfam-chip">CESFAM N° 1 · Baquedano 626</span>
-                    <span class="cesfam-chip">CESFAM N° 2 · Rancagua Sur</span>
-                    <span class="cesfam-chip">CESFAM N° 3 · Villalobos 010</span>
-                    <span class="cesfam-chip">CESFAM N° 4 · Rep. de Chile 397</span>
-                    <span class="cesfam-chip">CESFAM N° 5 · Los Talaveras</span>
-                    <span class="cesfam-chip featured">CESFAM N° 6 · Ignacio Caroca</span>
-                    <span class="cesfam-chip">CESFAM N° 8 · Nelson Pereira</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="page-nav-controls page-nav-split">
-                <span class="spread-indicator">Pliego III · Territorio</span>
-                <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-spread="4" aria-label="Pasar a Alianzas y Equipo">
-                  <span>Alianzas & Equipo →</span>
-                </button>
-              </div>
+            <div class="page-nav-controls page-nav-split">
+              <span class="spread-indicator">Pliego I · Identidad</span>
+              <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-page="4" aria-label="Pasar a Actividades">
+                <span>Actividades →</span>
+              </button>
             </div>
           </div>
-        </section>
+        </div>
 
         <!-- ─────────────────────────────────────────────────────────── -->
-        <!-- PLIEGO 4: ALIANZAS, PRENSA & EQUIPO DIRECTIVO               -->
+        <!-- PÁGINA 4: ACTIVIDADES - FORMACIÓN & DIÁLOGO IZQUIERDA       -->
         <!-- ─────────────────────────────────────────────────────────── -->
-        <section class="book-spread spread-4" id="alianzas" data-spread="4" data-title="Alianzas & Equipo">
-          <!-- Página Izquierda (Ecosistema y Prensa) -->
-          <div class="book-page page-left">
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Ecosistema Colaborativo</span>
-                <h2 class="section-title">Con quiénes <em>trabajamos</em></h2>
-                <p class="section-desc-compact">Financiamiento público, instituciones aliadas y difusión en medios.</p>
-              </div>
+        <div class="book-page page-left" id="que-hacemos" data-density="soft" data-page-num="4">
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Líneas de Acción</span>
+              <h2 class="section-title">Nuestras <em>actividades</em></h2>
+              <p class="section-desc-compact">Formación para mediadores, talleres comunitarios y material didáctico hecho a mano.</p>
+            </div>
 
-              <div class="alianzas-paper-block">
-                <div class="alianza-col-mini">
-                  <h4>Apoyo Público</h4>
-                  <p>Fondo del Libro y la Lectura (MINCAP) · SERPAT</p>
-                </div>
-                <div class="alianza-col-mini">
-                  <h4>Aliados</h4>
-                  <p>Bibliotecas 34 y 251 · Cormun Rancagua · Museo Regional · U. de O'Higgins</p>
-                </div>
-              </div>
+            <!-- Filtros de categoría dentro del pliego -->
+            <div class="category-bubbles-book">
+              <button class="bubble-btn active" data-category="all">Todo</button>
+              <button class="bubble-btn" data-category="formacion">Formación</button>
+              <button class="bubble-btn" data-category="materiales">Materiales</button>
+              <button class="bubble-btn" data-category="talleres">Talleres</button>
+            </div>
 
-              <div class="prensa-paper-list">
-                <a href="https://ladamajuana.cl/2024/03/08/recomendados-8m-proyectos-culturales-liderados-por-mujeres-en-la-region-de-ohiggins/" target="_blank" rel="noopener" class="prensa-paper-item">
-                  <strong>Revista La Dama Juana</strong>
-                  <span>Proyectos liderados por mujeres en O'Higgins (8M) →</span>
-                </a>
-                <a href="https://heyzine.com/flip-book/19c2d2c8fe.html" target="_blank" rel="noopener" class="prensa-paper-item">
-                  <strong>Revista Sol de Septiembre</strong>
-                  <span>Publicación digital de fomento lector comunitario →</span>
-                </a>
-                <a href="https://horadenoticias.cl/cultura/inauguran-proyecto-que-busca-acercar-la-lectura-y-los-libros-a-la-comunidad-en-los-cesfam-de-rancagua/" target="_blank" rel="noopener" class="prensa-paper-item">
-                  <strong>Hora de Noticias</strong>
-                  <span>Inauguración de bibliotecas en salas de espera CESFAM →</span>
-                </a>
-              </div>
+            <div class="book-activities-scroll">
+              <!-- Actividad 1 -->
+              <article class="activity-card featured" data-category="formacion" data-title="Foro Literario 2025: LIJ en Diálogo" data-tag="Formación Especializada" data-desc="Ciclo formativo inédito de 8 charlas con destacadas académicas y especialistas en Literatura Infantil y Juvenil en Chile (Constanza Ried, Carola Vesely, Isabel Ibaceta, Verónica Vives, Andrea Bravo, Claudia Andrade, Hugo Hinojosa y Lily Vergara). Desarrollado en la Biblioteca Pública N°34 de Rancagua, financiado por el Fondo Nacional del Libro y la Lectura 2025." data-img="img/cesfam6.jpg">
+                <div class="activity-tag">Formación · Fondo del Libro</div>
+                <h3 class="activity-title">Foro Literario 2025: LIJ en Diálogo</h3>
+                <p class="activity-desc">8 conferencias magistrales con especialistas nacionales para formar a mediadores y educadores.</p>
+                <div class="activity-footer"><span class="btn-link">Ver programa →</span></div>
+              </article>
 
-              <div class="page-nav-controls">
-                <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-spread="3" aria-label="Volver a Módulos CESFAM">
-                  <span>← Módulos CESFAM</span>
-                </button>
-              </div>
+              <!-- Actividad 2 -->
+              <article class="activity-card" data-category="formacion" data-title="Ciclo de Coloquios y Charlas de Inclusión" data-tag="Formación Continua" data-desc="Charlas formativas sobre fomento y mediación lectora como herramienta de inclusión social, innovación y salud integral. Espacios de reflexión dirigidos a funcionarios de salud, docentes y comunidades educativas." data-img="img/cesfam6.jpg">
+                <div class="activity-tag">Formación & Diálogo</div>
+                <h3 class="activity-title">Ciclo de Coloquios y Charlas</h3>
+                <p class="activity-desc">Encuentros sobre mediación lectora como derecho cultural, inclusión y bienestar en salud.</p>
+                <div class="activity-footer"><span class="btn-link">Ver charlas →</span></div>
+              </article>
+
+              <!-- Actividad 3 -->
+              <article class="activity-card" data-category="materiales" data-title="Mandiles Didácticos Cuentacuentos" data-tag="Material Creativo Exclusivo" data-desc="Creación textil artesanal de soportes escénicos desplegables que transforman el cuerpo del mediador en un escenario narrativo. Incluye jornadas de capacitación para bibliotecarias y mediadoras de toda la Región de O'Higgins." data-img="img/gabriela.png">
+                <div class="activity-tag">Material Creativo</div>
+                <h3 class="activity-title">Mandiles Didácticos Cuentacuentos</h3>
+                <p class="activity-desc">Soportes textiles escénicos artesanales para enriquecer la narración oral.</p>
+                <div class="activity-footer"><span class="btn-link">Conocer mandiles →</span></div>
+              </article>
+
+              <!-- Actividad 4 -->
+              <article class="activity-card" data-category="materiales" data-title="Libros Pop-Up Gigantes y Teatro Lambe-Lambe" data-tag="Innovación Didáctica" data-desc="Diseño y confección de libros tridimensionales de gran formato y dispositivos de teatro en miniatura (Lambe-Lambe), que convierten el acto de leer en una experiencia visual, sensorial e inmersiva." data-img="img/gabriela.png">
+                <div class="activity-tag">Material Creativo</div>
+                <h3 class="activity-title">Libros Pop-Up Gigantes & Lambe-Lambe</h3>
+                <p class="activity-desc">Estructuras tridimensionales y teatro íntimo en miniatura.</p>
+                <div class="activity-footer"><span class="btn-link">Ver materiales →</span></div>
+              </article>
+            </div>
+
+            <div class="page-nav-controls">
+              <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-page="2" aria-label="Volver a Quiénes somos">
+                <span>← Quiénes somos</span>
+              </button>
             </div>
           </div>
-
-          <!-- Página Derecha (Equipo Directivo) -->
-          <div class="book-page page-right" id="equipo">
-            <div class="page-background-fold"></div>
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Equipo Humano</span>
-                <h2 class="section-title">Quiénes <em>hacen</em> la Fundación</h2>
-              </div>
-
-              <div class="team-paper-grid">
-                <!-- Isabel -->
-                <div class="team-member-card">
-                  <div class="team-photo-frame">
-                    <img src="img/isabel.jpg" alt="Isabel Contreras Barrios">
-                  </div>
-                  <div class="team-details">
-                    <h3>Isabel Contreras Barrios</h3>
-                    <div class="team-role-tag">Gestora y Coordinadora General</div>
-                    <p>Licenciada en Artes y Musicóloga. Tras 9 años en Alemania, lidera la gestión comunitaria de la fundación.</p>
-                  </div>
-                </div>
-
-                <!-- Lily -->
-                <div class="team-member-card">
-                  <div class="team-photo-frame">
-                    <img src="img/lily.jpg" alt="Lily Vergara Osorio">
-                  </div>
-                  <div class="team-details">
-                    <h3>Lily Vergara Osorio</h3>
-                    <div class="team-role-tag">Mediación y Talleres</div>
-                    <p>Licenciada en Literatura, Bibliotecóloga y Máster en Fomento de la Lectura Infantil y Juvenil.</p>
-                  </div>
-                </div>
-
-                <!-- Belén -->
-                <div class="team-member-card">
-                  <div class="team-photo-frame">
-                    <img src="img/belen.jpg" alt="Belén Larenas Soto">
-                  </div>
-                  <div class="team-details">
-                    <h3>Belén Larenas Soto</h3>
-                    <div class="team-role-tag">Identidad Visual y Redes</div>
-                    <p>Licenciada en Artes (Diseño Teatral) y Asistente Montessori. Diseñadora artesanal de los módulos.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="page-nav-controls page-nav-split">
-                <span class="spread-indicator">Pliego IV · Equipo</span>
-                <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-spread="5" aria-label="Pasar a Colaborar">
-                  <span>Colaborar →</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+        </div>
 
         <!-- ─────────────────────────────────────────────────────────── -->
-        <!-- PLIEGO 5: COLABORAR & CIERRE (Registro de Voluntarios)      -->
+        <!-- PÁGINA 5: ACTIVIDADES - TALLERES & MURAL DERECHA           -->
         <!-- ─────────────────────────────────────────────────────────── -->
-        <section class="book-spread spread-5" id="colaborar" data-spread="5" data-title="Colaborar">
-          <!-- Página Izquierda (Formas de Sumarse y Redes) -->
-          <div class="book-page page-left">
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Participación Abierta</span>
-                <h2 class="section-title">¿Quieres <em>colaborar</em>?</h2>
-                <p class="section-desc-compact">Hay varias formas concretas de apoyar nuestro trabajo territorial:</p>
-              </div>
+        <div class="book-page page-right" data-density="soft" data-page-num="5">
+          <div class="page-background-fold"></div>
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Creación Territorial</span>
+              <h3 class="page-subtitle">Talleres y Encuentros en el Barrio</h3>
+            </div>
 
-              <div class="colabora-paper-list">
-                <div class="colabora-paper-entry">
-                  <strong>📚 Campaña Permanente de Donación de Libros</strong>
-                  <p>Recibimos novelas, cuentos infantiles e historietas en buen estado para los módulos de salud.</p>
-                </div>
-                <div class="colabora-paper-entry">
-                  <strong>🤝 Red de Voluntariado</strong>
-                  <p>Limpieza, reparación y catalogación comunitaria de libros, además de mediaciones en terreno.</p>
-                </div>
-                <div class="colabora-paper-entry">
-                  <strong>🏛️ Convenios y Empresas</strong>
-                  <p>Alianzas con municipalidades, empresas y colegios comprometidos con el fomento lector.</p>
-                </div>
-                <div class="colabora-paper-entry">
-                  <strong>✉️ Contacto Directo</strong>
-                  <p><a href="mailto:paradasliterarias@gmail.com">paradasliterarias@gmail.com</a></p>
-                </div>
-              </div>
+            <div class="book-activities-scroll">
+              <!-- Actividad 5 -->
+              <article class="activity-card featured" data-category="talleres" data-title="Hilando Historias con Gabriela Mistral" data-tag="Taller Textil Comunitario" data-desc="Taller de mediación literaria y creación colectiva textil en homenaje a los 80 años del Premio Nobel. 19 mujeres de la Región de O'Higgins bordaron sus historias personales en diálogo con la poesía mistraliana, culminando en un gran mural colectivo expuesto en el Museo Regional de Rancagua con financiamiento SERPAT." data-img="img/gabriela.png">
+                <div class="activity-tag">Taller & Mural Museo</div>
+                <h3 class="activity-title">Hilando con Gabriela Mistral</h3>
+                <p class="activity-desc">Mural textil colectivo de 19 mujeres expuesto en el Museo Regional de Rancagua.</p>
+                <div class="activity-footer"><span class="btn-link">Ver mural colectivo →</span></div>
+              </article>
 
-              <div class="social-box-book">
-                <a href="https://www.instagram.com/parada.literaria.rancagua/" target="_blank" rel="noopener" class="btn-instagram-book">
-                  @parada.literaria.rancagua en Instagram →
-                </a>
-              </div>
+              <!-- Actividad 6 -->
+              <article class="activity-card" data-category="talleres" data-title="Navegando entre Preguntas: Creación Artístico-Literaria" data-tag="Taller Infantil" data-desc="Taller de creación artístico-literaria infantil realizado en el Museo Regional de Rancagua en el marco del 'Libro de las Preguntas' de Pablo Neruda con la visita de la destacada ilustradora nacional Paloma Valdivia." data-img="img/cesfam6.jpg">
+                <div class="activity-tag">Infancia & Arte</div>
+                <h3 class="activity-title">Navegando entre Preguntas</h3>
+                <p class="activity-desc">Taller de arte y literatura infantil junto a Paloma Valdivia.</p>
+                <div class="activity-footer"><span class="btn-link">Ver taller infantil →</span></div>
+              </article>
 
-              <div class="page-nav-controls">
-                <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-spread="4" aria-label="Volver a Alianzas y Equipo">
-                  <span>← Equipo</span>
-                </button>
-              </div>
+              <!-- Actividad 7 -->
+              <article class="activity-card" data-category="talleres" data-title="Maratones de Cuentacuentos y Patrimonio Lingüístico" data-tag="Intervención Territorial" data-desc="Intervenciones de narración oral y mediación territorial en el Día de los Patrimonios, fiestas comunitarias e inauguración de la Guaguateca de la Biblioteca Pública N°34." data-img="img/cesfam6.jpg">
+                <div class="activity-tag">Comunidad & Patrimonio</div>
+                <h3 class="activity-title">Cuentacuentos & Patrimonio</h3>
+                <p class="activity-desc">Narraciones orales situadas y rescate lingüístico en barrios.</p>
+                <div class="activity-footer"><span class="btn-link">Ver maratones →</span></div>
+              </article>
+
+              <!-- Actividad 8 -->
+              <article class="activity-card" data-category="talleres" data-title="Mediación Lectora Familiar en Escuelas" data-tag="Vínculo Escolar" data-desc="Clases prácticas de mediación lectora y estrategias de animación del libro en el entorno familiar para madres, padres y apoderados, realizadas en alianza con la Biblioteca Pública 251 en el Colegio René Schneider." data-img="img/cesfam6.jpg">
+                <div class="activity-tag">Escuela & Familia</div>
+                <h3 class="activity-title">Mediación en Escuelas</h3>
+                <p class="activity-desc">Estrategias prácticas para padres en fomento lector hogareño.</p>
+                <div class="activity-footer"><span class="btn-link">Ver mediación escolar →</span></div>
+              </article>
+            </div>
+
+            <div class="page-nav-controls page-nav-split">
+              <span class="spread-indicator">Pliego II · Actividades</span>
+              <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-page="6" aria-label="Pasar a Módulos CESFAM y Puntos de Donación">
+                <span>Módulos CESFAM →</span>
+              </button>
             </div>
           </div>
+        </div>
 
-          <!-- Página Derecha (Cuaderno de Registro de Colaboradores) -->
-          <div class="book-page page-right">
-            <div class="page-background-fold"></div>
-            <div class="page-content">
-              <div class="section-header-compact">
-                <span class="manifesto-badge">Libro de Registro</span>
-                <h3 class="page-subtitle">Súmate a la Fundación</h3>
-                <p class="section-desc-compact">Déjanos tus datos y nos comunicaremos contigo a la brevedad.</p>
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <!-- PÁGINA 6: MÓDULOS CESFAM IZQUIERDA                         -->
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <div class="book-page page-left" id="proyectos" data-density="soft" data-page-num="6">
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Salud y Cultura</span>
+              <h2 class="section-title">Bibliotecas en <em>CESFAM</em></h2>
+              <p class="section-desc-compact">Puntos de lectura abierta en salas de espera de salud pública.</p>
+            </div>
+
+            <div class="project-paper-card">
+              <div class="project-photo-frame">
+                <img src="img/cesfam6.jpg" alt="Módulo inaugural en CESFAM N° 6 Ignacio Caroca">
+                <span class="photo-caption-tag">Hito Inaugural · Rancagua</span>
               </div>
-
-              <!-- Mensaje de confirmación -->
-              <div class="form-feedback" id="formFeedback" style="display: none;">
-                <span class="feedback-icon">✓</span>
-                <div>
-                  <strong>¡Registro recibido con éxito!</strong>
-                  <p>Gracias por tu interés en colaborar con Fundación Parada Literaria.</p>
-                </div>
-              </div>
-
-              <form id="colaboraForm" class="colabora-form-book">
-                <div class="form-group-compact">
-                  <label for="col-nombre">Nombre completo</label>
-                  <input type="text" id="col-nombre" required placeholder="Ej: María González">
-                </div>
-
-                <div class="form-group-compact">
-                  <label for="col-email">Correo electrónico</label>
-                  <input type="email" id="col-email" required placeholder="tu@correo.cl">
-                </div>
-
-                <div class="form-group-compact">
-                  <label for="col-tipo">¿Cómo te gustaría colaborar?</label>
-                  <select id="col-tipo" required>
-                    <option value="">Selecciona una opción...</option>
-                    <option value="libros">Quiero donar libros</option>
-                    <option value="voluntario">Quiero ser voluntario/a o mediador/a</option>
-                    <option value="institucion">Represento a una institución / CESFAM</option>
-                    <option value="otro">Otro tipo de consulta</option>
-                  </select>
-                </div>
-
-                <div class="form-group-compact">
-                  <label for="col-mensaje">Mensaje breve</label>
-                  <textarea id="col-mensaje" rows="2" placeholder="Cuéntanos brevemente sobre tu interés..."></textarea>
-                </div>
-
-                <button type="submit" class="btn-primary btn-block">Enviar registro</button>
-              </form>
-
-              <div class="page-nav-controls page-nav-split">
-                <span class="spread-indicator">Pliego V · Colofón</span>
-                <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-spread="0" aria-label="Volver a la portada">
-                  <span>Volver a la portada ↺</span>
-                </button>
+              <div class="project-paper-body">
+                <div class="project-location">CESFAM N° 6 Ignacio Caroca</div>
+                <blockquote class="project-quote-book">
+                  "Porque en el fondo todo es lo mismo: el viaje, el amor, la lectura; una misma aventura donde nuestro paisaje interior se trastorna."
+                  <cite>— Michèle Petit</cite>
+                </blockquote>
+                <p class="project-text-book">
+                  Las personas pueden tomar un libro prestado libremente, leerlo durante su tiempo de espera o intercambiarlo por uno propio.
+                </p>
               </div>
             </div>
+
+            <div class="page-nav-controls">
+              <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-page="4" aria-label="Volver a Actividades">
+                <span>← Actividades</span>
+              </button>
+            </div>
           </div>
-        </section>
+        </div>
+
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <!-- PÁGINA 7: PUNTOS DE DONACIÓN DERECHA                       -->
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <div class="book-page page-right" id="puntos-donacion" data-density="soft" data-page-num="7">
+          <div class="page-background-fold"></div>
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Red Territorial Rancagua</span>
+              <h2 class="section-title">Dónde <em>donar</em> libros</h2>
+              <p class="section-desc-compact">9 puntos oficiales para donar y disfrutar la lectura libre en la ciudad:</p>
+            </div>
+
+            <div class="puntos-paper-container">
+              <div class="puntos-category-box">
+                <h4>Bibliotecas Públicas (Centros de Acopio y Clasificación)</h4>
+                <ul class="puntos-list-book">
+                  <li>
+                    <strong>Biblioteca Pública N° 34 Eduardo de Geyter</strong>
+                    <span>Avenida Cachapoal 090, Rancagua</span>
+                  </li>
+                  <li>
+                    <strong>Biblioteca Pública N° 251 Santiago Benadava Cattán</strong>
+                    <span>Av. La Compañía 159, Rancagua (Taller de etiquetado)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="puntos-category-box">
+                <h4>Módulos en Salas de Espera CESFAM</h4>
+                <div class="cesfam-chips-grid">
+                  <span class="cesfam-chip">CESFAM N° 1 · Baquedano 626</span>
+                  <span class="cesfam-chip">CESFAM N° 2 · Rancagua Sur</span>
+                  <span class="cesfam-chip">CESFAM N° 3 · Villalobos 010</span>
+                  <span class="cesfam-chip">CESFAM N° 4 · Rep. de Chile 397</span>
+                  <span class="cesfam-chip">CESFAM N° 5 · Los Talaveras</span>
+                  <span class="cesfam-chip featured">CESFAM N° 6 · Ignacio Caroca</span>
+                  <span class="cesfam-chip">CESFAM N° 8 · Nelson Pereira</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-nav-controls page-nav-split">
+              <span class="spread-indicator">Pliego III · Territorio</span>
+              <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-page="8" aria-label="Pasar a Alianzas y Equipo">
+                <span>Alianzas & Equipo →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <!-- PÁGINA 8: ALIANZAS & PRENSA IZQUIERDA                      -->
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <div class="book-page page-left" id="alianzas" data-density="soft" data-page-num="8">
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Ecosistema Colaborativo</span>
+              <h2 class="section-title">Con quiénes <em>trabajamos</em></h2>
+              <p class="section-desc-compact">Financiamiento público, instituciones aliadas y difusión en medios.</p>
+            </div>
+
+            <div class="alianzas-paper-block">
+              <div class="alianza-col-mini">
+                <h4>Apoyo Público</h4>
+                <p>Fondo del Libro y la Lectura (MINCAP) · SERPAT</p>
+              </div>
+              <div class="alianza-col-mini">
+                <h4>Aliados</h4>
+                <p>Bibliotecas 34 y 251 · Cormun Rancagua · Museo Regional · U. de O'Higgins</p>
+              </div>
+            </div>
+
+            <div class="prensa-paper-list">
+              <a href="https://ladamajuana.cl/2024/03/08/recomendados-8m-proyectos-culturales-liderados-por-mujeres-en-la-region-de-ohiggins/" target="_blank" rel="noopener" class="prensa-paper-item">
+                <strong>Revista La Dama Juana</strong>
+                <span>Proyectos liderados por mujeres en O'Higgins (8M) →</span>
+              </a>
+              <a href="https://heyzine.com/flip-book/19c2d2c8fe.html" target="_blank" rel="noopener" class="prensa-paper-item">
+                <strong>Revista Sol de Septiembre</strong>
+                <span>Publicación digital de fomento lector comunitario →</span>
+              </a>
+              <a href="https://horadenoticias.cl/cultura/inauguran-proyecto-que-busca-acercar-la-lectura-y-los-libros-a-la-comunidad-en-los-cesfam-de-rancagua/" target="_blank" rel="noopener" class="prensa-paper-item">
+                <strong>Hora de Noticias</strong>
+                <span>Inauguración de bibliotecas en salas de espera CESFAM →</span>
+              </a>
+            </div>
+
+            <div class="page-nav-controls">
+              <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-page="6" aria-label="Volver a Módulos CESFAM">
+                <span>← Módulos CESFAM</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <!-- PÁGINA 9: EQUIPO DIRECTIVO DERECHA                         -->
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <div class="book-page page-right" id="equipo" data-density="soft" data-page-num="9">
+          <div class="page-background-fold"></div>
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Equipo Humano</span>
+              <h2 class="section-title">Quiénes <em>hacen</em> la Fundación</h2>
+            </div>
+
+            <div class="team-paper-grid">
+              <!-- Isabel -->
+              <div class="team-member-card">
+                <div class="team-photo-frame">
+                  <img src="img/isabel.jpg" alt="Isabel Contreras Barrios">
+                </div>
+                <div class="team-details">
+                  <h3>Isabel Contreras Barrios</h3>
+                  <div class="team-role-tag">Gestora y Coordinadora General</div>
+                  <p>Licenciada en Artes y Musicóloga. Tras 9 años en Alemania, lidera la gestión comunitaria de la fundación.</p>
+                </div>
+              </div>
+
+              <!-- Lily -->
+              <div class="team-member-card">
+                <div class="team-photo-frame">
+                  <img src="img/lily.jpg" alt="Lily Vergara Osorio">
+                </div>
+                <div class="team-details">
+                  <h3>Lily Vergara Osorio</h3>
+                  <div class="team-role-tag">Mediación y Talleres</div>
+                  <p>Licenciada en Literatura, Bibliotecóloga y Máster en Fomento de la Lectura Infantil y Juvenil.</p>
+                </div>
+              </div>
+
+              <!-- Belén -->
+              <div class="team-member-card">
+                <div class="team-photo-frame">
+                  <img src="img/belen.jpg" alt="Belén Larenas Soto">
+                </div>
+                <div class="team-details">
+                  <h3>Belén Larenas Soto</h3>
+                  <div class="team-role-tag">Identidad Visual y Redes</div>
+                  <p>Licenciada en Artes (Diseño Teatral) y Asistente Montessori. Diseñadora artesanal de los módulos.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="page-nav-controls page-nav-split">
+              <span class="spread-indicator">Pliego IV · Equipo</span>
+              <button type="button" class="btn-turn-leaf next-leaf-btn" data-go-page="10" aria-label="Pasar a Colaborar">
+                <span>Colaborar →</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <!-- PÁGINA 10: COLABORAR & VÍAS DE APOYO IZQUIERDA             -->
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <div class="book-page page-left" id="colaborar" data-density="soft" data-page-num="10">
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Participación Abierta</span>
+              <h2 class="section-title">¿Quieres <em>colaborar</em>?</h2>
+              <p class="section-desc-compact">Hay varias formas concretas de apoyar nuestro trabajo territorial:</p>
+            </div>
+
+            <div class="colabora-paper-list">
+              <div class="colabora-paper-entry">
+                <strong>📚 Campaña Permanente de Donación de Libros</strong>
+                <p>Recibimos novelas, cuentos infantiles e historietas en buen estado para los módulos de salud.</p>
+              </div>
+              <div class="colabora-paper-entry">
+                <strong>🤝 Red de Voluntariado</strong>
+                <p>Limpieza, reparación y catalogación comunitaria de libros, además de mediaciones en terreno.</p>
+              </div>
+              <div class="colabora-paper-entry">
+                <strong>🏛️ Convenios y Empresas</strong>
+                <p>Alianzas con municipalidades, empresas y colegios comprometidos con el fomento lector.</p>
+              </div>
+              <div class="colabora-paper-entry">
+                <strong>✉️ Contacto Directo</strong>
+                <p><a href="mailto:paradasliterarias@gmail.com">paradasliterarias@gmail.com</a></p>
+              </div>
+            </div>
+
+            <div class="social-box-book">
+              <a href="https://www.instagram.com/parada.literaria.rancagua/" target="_blank" rel="noopener" class="btn-instagram-book">
+                @parada.literaria.rancagua en Instagram →
+              </a>
+            </div>
+
+            <div class="page-nav-controls">
+              <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-page="8" aria-label="Volver a Alianzas y Equipo">
+                <span>← Equipo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <!-- PÁGINA 11: REGISTRO Y COLOFÓN DERECHA (data-density="hard") -->
+        <!-- ─────────────────────────────────────────────────────────── -->
+        <div class="book-page page-right" data-density="hard" data-page-num="11">
+          <div class="page-background-fold"></div>
+          <div class="page-content">
+            <div class="section-header-compact">
+              <span class="manifesto-badge">Libro de Registro</span>
+              <h3 class="page-subtitle">Súmate a la Fundación</h3>
+              <p class="section-desc-compact">Déjanos tus datos y nos comunicaremos contigo a la brevedad.</p>
+            </div>
+
+            <!-- Mensaje de confirmación -->
+            <div class="form-feedback" id="formFeedback" style="display: none;">
+              <span class="feedback-icon">✓</span>
+              <div>
+                <strong>¡Registro recibido con éxito!</strong>
+                <p>Gracias por tu interés en colaborar con Fundación Parada Literaria.</p>
+              </div>
+            </div>
+
+            <form id="colaboraForm" class="colabora-form-book">
+              <div class="form-group-compact">
+                <label for="col-nombre">Nombre completo</label>
+                <input type="text" id="col-nombre" required placeholder="Ej: María González">
+              </div>
+
+              <div class="form-group-compact">
+                <label for="col-email">Correo electrónico</label>
+                <input type="email" id="col-email" required placeholder="tu@correo.cl">
+              </div>
+
+              <div class="form-group-compact">
+                <label for="col-tipo">¿Cómo te gustaría colaborar?</label>
+                <select id="col-tipo" required>
+                  <option value="">Selecciona una opción...</option>
+                  <option value="libros">Quiero donar libros</option>
+                  <option value="voluntario">Quiero ser voluntario/a o mediador/a</option>
+                  <option value="institucion">Represento a una institución / CESFAM</option>
+                  <option value="otro">Otro tipo de consulta</option>
+                </select>
+              </div>
+
+              <div class="form-group-compact">
+                <label for="col-mensaje">Mensaje breve</label>
+                <textarea id="col-mensaje" rows="2" placeholder="Cuéntanos brevemente sobre tu interés..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary btn-block">Enviar registro</button>
+            </form>
+
+            <div class="page-nav-controls page-nav-split">
+              <span class="spread-indicator">Pliego V · Colofón</span>
+              <button type="button" class="btn-turn-leaf prev-leaf-btn" data-go-page="0" aria-label="Volver a la portada">
+                <span>Volver a la portada ↺</span>
+              </button>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
@@ -657,6 +651,8 @@
   <!-- GSAP & ScrollTrigger para la experiencia Pop-Up -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- StPageFlip Library -->
+  <script src="page-flip.browser.js"></script>
 
   <script src="script.js"></script>
 </body>

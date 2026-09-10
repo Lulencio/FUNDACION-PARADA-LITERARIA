@@ -163,56 +163,126 @@ if (colaboraForm) {
 }
 
 // ══════════════════════════════════════════════════════════════
-// CONTROLADOR INTEGRAL DEL LIBRO POP-UP (6 PLIEGOS EDITORIALES)
+// CONTROLADOR INTEGRAL DEL LIBRO POP-UP (StPageFlip & Responsive)
 // ══════════════════════════════════════════════════════════════
 const BookController = {
-  currentSpread: 0,
-  totalSpreads: 6,
-  isAnimating: false,
-  spreads: [],
+  pageFlip: null,
+  currentPage: 0,
+  totalPages: 12,
+  isInitialized: false,
 
   init() {
-    this.spreads = Array.from(document.querySelectorAll('.book-spread'));
-    if (!this.spreads.length) return;
+    const bookEl = document.getElementById('bookContainer');
+    const pages = document.querySelectorAll('#bookContainer .book-page');
+    if (!bookEl || !pages.length) return;
 
-    this.bindEvents();
-    this.initFirstSpreadAnimation();
+    // Verificar si StPageFlip está disponible y la pantalla es de escritorio/tablet
+    const isDesktop = window.innerWidth > 900;
+    const hasStPageFlip = typeof St !== 'undefined' && typeof St.PageFlip !== 'undefined';
+
+    if (hasStPageFlip && isDesktop) {
+      this.initStPageFlip(bookEl, pages);
+    } else {
+      this.initFallback(pages);
+    }
+
+    this.bindGlobalEvents();
+    this.initHeroMistralAnimation();
+  },
+
+  initStPageFlip(bookEl, pages) {
+    try {
+      // Ajustar dimensiones del libro según el viewport
+      const containerW = Math.min(1160, window.innerWidth - 60);
+      const pageW = Math.floor(containerW / 2);
+      const pageH = Math.min(680, Math.max(520, window.innerHeight - 140));
+
+      this.pageFlip = new St.PageFlip(bookEl, {
+        width: pageW,
+        height: pageH,
+        size: 'stretch',
+        minWidth: 320,
+        maxWidth: 600,
+        minHeight: 480,
+        maxHeight: 720,
+        maxShadowOpacity: 0.5,
+        showCover: false,
+        usePortrait: true,
+        autoSize: true,
+        drawShadow: true,
+        flippingTime: 850,
+        useMouseEvents: true,
+        clickEventForward: true
+      });
+
+      this.pageFlip.loadFromHTML(pages);
+
+      // Evento al pasar de página
+      this.pageFlip.on('flip', (e) => {
+        this.currentPage = e.data;
+        this.updateNavState(e.data);
+
+        // Erguir a Gabriela Mistral cuando se visualiza la portada (página 0 o 1)
+        if (e.data === 0 || e.data === 1) {
+          this.initHeroMistralAnimation();
+        }
+      });
+
+      this.isInitialized = true;
+    } catch (err) {
+      console.warn('StPageFlip falló al inicializar, activando modo editorial:', err);
+      this.initFallback(pages);
+    }
+  },
+
+  initFallback(pages) {
+    // Modo editorial limpio si StPageFlip no está disponible o en pantallas reducidas
+    this.totalPages = pages.length;
+    pages.forEach((p, idx) => {
+      p.style.display = (idx === 0 || idx === 1) ? 'flex' : 'none';
+    });
     this.updateNavState(0);
   },
 
-  bindEvents() {
-    // 1. Botones con data-go-spread (Pasar página / Volver / Botones de acción)
-    document.querySelectorAll('[data-go-spread]').forEach(btn => {
+  bindGlobalEvents() {
+    // 1. Botones con data-go-page
+    document.querySelectorAll('[data-go-page]').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        const target = parseInt(btn.getAttribute('data-go-spread'), 10);
+        const target = parseInt(btn.getAttribute('data-go-page'), 10);
         if (!isNaN(target)) {
-          this.goToSpread(target);
+          this.goToPage(target);
         }
       });
     });
 
-    // 2. Enlaces de navegación principal (Desktop & Móvil)
+    // 2. Enlaces del menú de navegación (Desktop & Móvil)
     const navMapping = {
       '#': 0,
       '#hero': 0,
-      '#fundacion': 1,
-      '#que-hacemos': 2,
-      '#proyectos': 3,
-      '#puntos-donacion': 3,
-      '#alianzas': 4,
-      '#equipo': 4,
-      '#colaborar': 5
+      '#fundacion': 2,
+      '#que-hacemos': 4,
+      '#proyectos': 6,
+      '#puntos-donacion': 7,
+      '#alianzas': 8,
+      '#equipo': 9,
+      '#colaborar': 10
     };
 
-    document.querySelectorAll('.nav-links a, .nav-menu-mobile a, .nav-logo').forEach(link => {
+    document.querySelectorAll('.nav-links a, .nav-menu-mobile a, .footer-links a, .nav-logo').forEach(link => {
       link.addEventListener('click', (e) => {
         const href = link.getAttribute('href');
         if (href && navMapping[href] !== undefined) {
           e.preventDefault();
-          this.goToSpread(navMapping[href]);
+          this.goToPage(navMapping[href]);
 
-          // Si el menú móvil está abierto, cerrarlo
+          // Scroll hacia el libro si se hace clic desde el footer o navbar
+          const bookView = document.getElementById('libro-experiencia');
+          if (bookView) {
+            bookView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+
+          // Cerrar menú móvil si está abierto
           if (typeof navMenuMobile !== 'undefined' && navMenuMobile.classList.contains('open')) {
             navMenuMobile.classList.remove('open');
             if (typeof navToggle !== 'undefined') navToggle.classList.remove('open');
@@ -222,20 +292,19 @@ const BookController = {
       });
     });
 
-    // 3. Navegación con teclado (Flechas Izquierda / Derecha)
+    // 3. Navegación con teclado (Flechas)
     document.addEventListener('keydown', (e) => {
-      // Ignorar si el usuario está escribiendo en el formulario o modal abierto
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) return;
       if (document.getElementById('activityModal')?.classList.contains('open')) return;
 
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
-        if (this.currentSpread < this.totalSpreads - 1) this.goToSpread(this.currentSpread + 1);
+        this.nextPage();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-        if (this.currentSpread > 0) this.goToSpread(this.currentSpread - 1);
+        this.prevPage();
       }
     });
 
-    // 4. Efecto de inclinación 3D sutil con el cursor (Parallax en el libro)
+    // 4. Parallax 3D suave con el cursor sobre el escenario
     const stage = document.getElementById('bookStage');
     const container = document.getElementById('bookContainer');
     if (stage && container && window.innerWidth > 1024) {
@@ -245,8 +314,8 @@ const BookController = {
         const y = (e.clientY - rect.top) / rect.height - 0.5;
 
         gsap.to(container, {
-          rotateY: x * 4,
-          rotateX: -y * 4,
+          rotateY: x * 3,
+          rotateX: -y * 3,
           duration: 0.8,
           ease: 'power1.out'
         });
@@ -258,73 +327,51 @@ const BookController = {
     }
   },
 
-  goToSpread(targetIndex) {
-    if (targetIndex === this.currentSpread || this.isAnimating) return;
-    if (targetIndex < 0 || targetIndex >= this.totalSpreads) return;
+  goToPage(pageIndex) {
+    if (this.pageFlip && this.isInitialized) {
+      try {
+        this.pageFlip.flip(pageIndex);
+        return;
+      } catch (e) {
+        console.warn('flip() error:', e);
+      }
+    }
 
-    this.isAnimating = true;
-    const currentEl = this.spreads[this.currentSpread];
-    const targetEl = this.spreads[targetIndex];
-    const goingForward = targetIndex > this.currentSpread;
+    // Fallback manual
+    const pages = document.querySelectorAll('#bookContainer .book-page');
+    const leftPageIdx = pageIndex % 2 === 0 ? pageIndex : pageIndex - 1;
+    const rightPageIdx = leftPageIdx + 1;
 
-    const isDesktop = window.innerWidth > 1024;
-    const isReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    pages.forEach((p, idx) => {
+      p.style.display = (idx === leftPageIdx || idx === rightPageIdx) ? 'flex' : 'none';
+    });
 
-    if (isDesktop && !isReduced && typeof gsap !== 'undefined') {
-      // Transición física 3D de paso de página
-      const tl = gsap.timeline({
-        onComplete: () => {
-          currentEl.classList.remove('active');
-          targetEl.classList.add('active');
-          this.currentSpread = targetIndex;
-          this.updateNavState(targetIndex);
-          this.isAnimating = false;
+    this.currentPage = leftPageIdx;
+    this.updateNavState(leftPageIdx);
+    if (leftPageIdx === 0) this.initHeroMistralAnimation();
+  },
 
-          // Si entramos al pliego 0, erguir a Gabriela Mistral
-          if (targetIndex === 0) this.initFirstSpreadAnimation();
-        }
-      });
-
-      // Efecto de levantamiento y giro de la hoja
-      tl.to(currentEl, {
-        opacity: 0,
-        scale: 0.98,
-        rotateY: goingForward ? -8 : 8,
-        duration: 0.35,
-        ease: 'power2.in'
-      })
-      .set(currentEl, { visibility: 'hidden' })
-      .set(targetEl, {
-        visibility: 'visible',
-        opacity: 0,
-        scale: 0.98,
-        rotateY: goingForward ? 8 : -8
-      })
-      .to(targetEl, {
-        opacity: 1,
-        scale: 1,
-        rotateY: 0,
-        duration: 0.45,
-        ease: 'power2.out'
-      });
-
+  nextPage() {
+    if (this.pageFlip && this.isInitialized) {
+      this.pageFlip.flipNext();
     } else {
-      // Cambio instantáneo limpio para móviles o movimiento reducido
-      currentEl.classList.remove('active');
-      targetEl.classList.add('active');
-      this.currentSpread = targetIndex;
-      this.updateNavState(targetIndex);
-      this.isAnimating = false;
-
-      // Scroll suave hacia la parte superior del libro en móvil
-      const stage = document.getElementById('bookStage');
-      if (stage) {
-        stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (this.currentPage + 2 < this.totalPages) {
+        this.goToPage(this.currentPage + 2);
       }
     }
   },
 
-  initFirstSpreadAnimation() {
+  prevPage() {
+    if (this.pageFlip && this.isInitialized) {
+      this.pageFlip.flipPrev();
+    } else {
+      if (this.currentPage - 2 >= 0) {
+        this.goToPage(this.currentPage - 2);
+      }
+    }
+  },
+
+  initHeroMistralAnimation() {
     if (typeof gsap === 'undefined') return;
     const figureLayer = document.querySelector('.popup-figure-layer');
     const quoteCard = document.querySelector('.popup-quote-card');
@@ -337,26 +384,31 @@ const BookController = {
     if (popupShadow) gsap.set(popupShadow, { scaleX: 0.4, opacity: 0 });
 
     gsap.timeline({ defaults: { ease: 'power3.out' } })
-      .to(figureLayer, { rotateX: 0, z: 35, opacity: 1, duration: 1.1, ease: 'back.out(1.4)', delay: 0.1 })
+      .to(figureLayer, { rotateX: 0, z: 35, opacity: 1, duration: 1.1, ease: 'back.out(1.4)', delay: 0.15 })
       .to(popupShadow, { scaleX: 1, opacity: 1, duration: 1.1 }, '<')
       .to(quoteCard, { rotateX: 0, z: 22, opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.6');
   },
 
-  updateNavState(index) {
-    // Sincronizar estilo activo en los enlaces del navbar
+  updateNavState(pageIndex) {
     const navLinks = document.querySelectorAll('.nav-links a');
     navLinks.forEach(link => link.classList.remove('active'));
 
-    const spreadToHash = {
+    const pageToHash = {
       0: '#hero',
-      1: '#fundacion',
-      2: '#que-hacemos',
-      3: '#proyectos',
-      4: '#alianzas',
-      5: '#colaborar'
+      1: '#hero',
+      2: '#fundacion',
+      3: '#fundacion',
+      4: '#que-hacemos',
+      5: '#que-hacemos',
+      6: '#proyectos',
+      7: '#puntos-donacion',
+      8: '#alianzas',
+      9: '#equipo',
+      10: '#colaborar',
+      11: '#colaborar'
     };
 
-    const targetHash = spreadToHash[index];
+    const targetHash = pageToHash[pageIndex];
     if (targetHash) {
       document.querySelectorAll(`.nav-links a[href="${targetHash}"]`).forEach(l => l.classList.add('active'));
     }
